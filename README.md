@@ -1,5 +1,6 @@
-ProLOV
+ProLOV: 
 ======
+The missing plugin for ontology Engineering
 
 A repository to create a plugin LOV for Protégé 
 
