@@ -9,7 +9,9 @@ LOV API
   - LOV API Documentation: http://lov.okfn.org/dataset/lov/apidoc/ 
   - LOV Search: http://lov.okfn.org/dataset/lov/apidoc/#lov2search
   - http://lov.okfn.org/dataset/lov/api/v2/search?q={TERM}&type=class for querying {TERM} as a class.
-e.g. http://lov.okfn.org/dataset/lov/api/v2/search?q=Person&type=class for "Person" as Class
+e.g. http://lov.okfn.org/dataset/lov/api/v2/search?q=Person&type=class for "Person" as Class.
+  - http://lov.okfn.org/dataset/lov/api/v2/search?q={TERM}&type=property for querying {TERM} as a property
+e.g.: http://lov.okfn.org/dataset/lov/api/v2/search?q=Person&type=property
 
 Deadlines
 ========
