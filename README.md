@@ -16,9 +16,9 @@ e.g.: http://lov.okfn.org/dataset/lov/api/v2/search?q=Person&type=property
 Protégé Plug in development
 ===========================
   - https://github.com/protegeproject/protege/wiki/Building-from-Source
+  - http://protegewiki.stanford.edu/wiki/CompileProtege5InEclipseWithMaven  
   - http://protegewiki.stanford.edu/wiki/PluginAnatomy
-
-
+  
 Deadlines
 ========
   - [ ] 12/1/2015: Call to see the evolution of the plugin
