@@ -13,6 +13,12 @@ e.g. http://lov.okfn.org/dataset/lov/api/v2/search?q=Person&type=class for "Pers
   - http://lov.okfn.org/dataset/lov/api/v2/search?q={TERM}&type=property for querying {TERM} as a property
 e.g.: http://lov.okfn.org/dataset/lov/api/v2/search?q=Person&type=property
 
+Protégé Plug in development
+===========================
+  - https://github.com/protegeproject/protege/wiki/Building-from-Source
+  - http://protegewiki.stanford.edu/wiki/PluginAnatomy
+
+
 Deadlines
 ========
   - [ ] 12/1/2015: Call to see the evolution of the plugin
