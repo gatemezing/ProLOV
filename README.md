@@ -21,8 +21,8 @@ Protégé Plug in development
   
 Deadlines
 ========
-  - [x ] 12/1/2015: Call to see the evolution of the plugin
-  - [x ] 20/01/2015: another call for looking at inserting a small plugin
+  - [ ] 12/1/2015: Call to see the evolution of the plugin
+  - [ ] 20/01/2015: another call for looking at inserting a small plugin
   - [ ] More here 
   
 
