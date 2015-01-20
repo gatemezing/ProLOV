@@ -6,7 +6,7 @@ A repository to create a plugin LOV for Protégé
 
 LOV API
 ======
-  - LOV API Documentation: http://lov.okfn.org/dataset/lov/apidoc/ 
+  - LOV API Documentation: http://lov.okfn.org/dataset/lov/apidoc/ (new version) 
   - LOV Search: http://lov.okfn.org/dataset/lov/apidoc/#lov2search
   - http://lov.okfn.org/dataset/lov/api/v2/search?q={TERM}&type=class for querying {TERM} as a class.
 e.g. http://lov.okfn.org/dataset/lov/api/v2/search?q=Person&type=class for "Person" as Class.
@@ -21,7 +21,8 @@ Protégé Plug in development
   
 Deadlines
 ========
-  - [ ] 12/1/2015: Call to see the evolution of the plugin
+  - [x ] 12/1/2015: Call to see the evolution of the plugin
+  - [x ] 20/01/2015: another call for looking at inserting a small plugin
   - [ ] More here 
   
 
