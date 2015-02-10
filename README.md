@@ -15,7 +15,7 @@ e.g.: http://lov.okfn.org/dataset/lov/api/v2/search?q=Person&type=property
 
 Protégé Plug in development
 ===========================
-  - https://github.com/protegeproject/protege/wiki/Building-from-Source
+  - https://github.com/protegeproject/protege/wiki/Building-from-Source (v5)
   - http://protegewiki.stanford.edu/wiki/CompileProtege5InEclipseWithMaven  
   - http://protegewiki.stanford.edu/wiki/PluginAnatomy
   
