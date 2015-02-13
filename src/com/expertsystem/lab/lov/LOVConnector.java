@@ -70,21 +70,129 @@ public class LOVConnector implements Constants {
 		return json;		
 	}
 	
+	/*
+	 * ex:http://lov.okfn.org/dataset/lov/api/v2/term/autocomplete?q=foaf:p&type=property
+	 * string = URI or prefixed URI to complete (from 1 character).
+	 * type can be class or property. 
+	 */
 	public JSONObject autocompleteTerm(String q, String type){
 		JSONObject json = null;
+		HttpURLConnection connection;
+		JSONObject json = null;
+		String query = LOV_AUTO_STRING + q + ""
+				+ "&type=" + type;
+
+		URL url;
+		try {
+			url = new URL(query);
+			connection = (HttpURLConnection) url.openConnection();						
+			connection.setRequestMethod("GET");
+			connection.setDoInput(true);
+			connection.setDoOutput(true);
+			connection.setUseCaches(false);
+
+			InputStream is = connection.getInputStream();						
+			BufferedReader rd = new BufferedReader(new InputStreamReader(is, "UTF-8"));				
+			StringBuffer response = new StringBuffer();					
+			String str;			
+			while ((str = rd.readLine()) != null) {
+				response.append(str);
+			}
+			rd.close();	
+			
+			System.out.println(response.toString());
+			
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (ProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
 		return json;
 	}
 	
 	
-	/*
-	 * Any other necessary method to get data from the LOV API 
+	
+	
+	/* listing all the vocabularies
+	 * in LOV ecosystem. Results composed of {titles[{lang,value}], nsp, prefix, uri} 
+	 * 
 	 */
+	public JSONObject listVocab() throws Exception
+		{
+		JSONObject obj = null;
+		
+		// build the string and URL
+		String s = LOV_API_VOCAB + "list";
+	    s += URLEncoder.encode("UTF-8");
+	    URL url = new URL(s);
+	 
+	    // read from the URL
+	    Scanner scan = new Scanner(url.openStream());
+	    String str = new String();
+	    while (scan.hasNext())
+	        str += scan.nextLine();
+	    scan.close();
+	 
+	    // build a JSON object
+	    JSONObject obj = new JSONObject(str);
+	    if (! obj.getString("status").equals("OK"))
+	        return;
+		/* todo: parse the result prefix, title + uri + description
+	    JSONArray arr = obj.getJSONArray("titles");
+	    for (int i = 0; i < arr.length(); i++)
+	    	// print the result
+	        System.out.println(arr.getJSONObject(i));
+	        */
+		
+	    return obj;
+	}
 	
 	
+	
+	/*get http://lov.okfn.org/dataset/lov/api/v2/vocabulary/info?vocab={string}
+	*example: http://lov.okfn.org/dataset/lov/api/v2/vocabulary/info?vocab=skos
+	* input: string representing Prefix, URI or Namespace of a vocabulary in LOV. 
+	* This parameter is mandatory
+	*output: uri, titles, descriptions, tags (domaine)
+	*/
+	public JSONObject infoVocab(String vocab)  throws Exception{
+		JSONObject result = null;
+		// build the string and URL
+		String st = LOV_API_VOCAB + "info"  + "?vocab="
+				+ "" + vocab;
+		st += URLEncoder.encode("UTF-8");
+		URL url = new URL(st);
+		
+		// read from the URL
+	    Scanner scan = new Scanner(url.openStream());
+	    String str = new String();
+	    while (scan.hasNext())
+	        str += scan.nextLine();
+	    scan.close();
+	 
+	    // build a JSON object
+	    JSONObject result = new JSONObject(str);
+	    if (! result.getString("status").equals("OK"))
+	        return;
+	    
+		
+		return result;
+		
+		
+		
+	}
+	
+	/*
+	 * Any other necessary method to get data from the LOV API ? Maybe for agent
+	 */
 	
 	
 	/*public static void main(String[] args){
 		LOVApi lovapi = new LOVApi();
 		lovapi.searchTerm("Person", "class");
-	}*/
+	} */
 }
