@@ -1,0 +1,118 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%   %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[runningheads,a4paper]{llncs}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\setcounter{tocdepth}{3}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{url}
+\usepackage{listings}
+\usepackage{subfigure}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+
+\newcommand{\keywords}[1]{\par\addvspace\baselineskip
+\noindent\keywordname\enspace\ignorespaces#1}
+
+% todo macro
+\usepackage{color}
+\newtheorem{deflda}{Axiom}
+\newcommand{\todo}[1]{\noindent\textcolor{red}{{\bf \{TODO}: #1{\bf \}}}}
+
+% Language Definitions for Turtle
+\definecolor{olivegreen}{rgb}{0.2,0.8,0.5}
+\definecolor{grey}{rgb}{0.5,0.5,0.5}
+\lstdefinelanguage{ttl}{
+sensitive=true,
+morecomment=[l][\color{brown}]{@},
+morecomment=[l][\color{red}]{\#},
+morestring=[b][\color{blue}]\",
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  Beginning of document  %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+% first the title is needed
+
+\title{The Prot{\'e}g{\'e}LOV Plugin: Ontology Access and Reuse for Everyone }
+
+
+\author{ Nuria Garc\'ia-Santa\inst{1}, Ghislain Auguste Atemezing\inst{2},\\ and Boris Villaz{\'o}n-Terrazas\inst{1}}
+
+\institute{
+Expert System Iberia, Campo de las Naciones, Madrid, Spain. \\
+\and MONDECA, 35 boulevard de Strasbourg, Paris, France .\\
+\email{ngarcia@expertsystem.com,gatemezing@eurecom,bvillazon@expertsystem.com \\
+}
+}  
+
+\maketitle
+
+%%%%%%%%%%%%%%%%%%
+%%%  Abstract  %%%
+%%%%%%%%%%%%%%%%%%
+
+\begin{abstract}
+Here goes the abstract in less than 200 words.
+
+\keywords{Plugin, ontology engineering, LOV, Prot{\'e}g{\'e}} 
+\end{abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  1. Introduction  %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Introduction}\label{sec:introduction}
+\input{intro}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  2. Related work  %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Related Work}\label{sec:soa}
+\input{relatedwork}
+
+
+
+\section{Linked Open Vocabulaires (LOV)}\label{sec:lov}
+\input{lov}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  3.ProtegeLOV Description  %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Prot{\'e}g{\'e}LOV}\label{sec:classification}
+\input{plugin-core}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  4. Conclusion and Future Work  %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Evaluation and Future Work}\label{sec:conclusion}
+\input{conclusions}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  Acknowledgments  %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\paragraph{\textbf{Acknowledgments.}} %\label{sec:acknowledgments}
+Thanks to Pierre-Yves and the LOV team for providing and maintaining a curated vocabularies and API access.
+% More acknowledgments here
+
+\bibliographystyle{abbrv}
+\nocite{*}
+\bibliography{eswcbib}
+\end{document}
