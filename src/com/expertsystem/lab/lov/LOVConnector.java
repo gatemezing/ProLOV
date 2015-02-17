@@ -8,6 +8,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.util.Scanner;
 
 import org.json.JSONObject;
 
@@ -78,7 +80,6 @@ public class LOVConnector implements Constants {
 	public JSONObject autocompleteTerm(String q, String type){
 		JSONObject json = null;
 		HttpURLConnection connection;
-		JSONObject json = null;
 		String query = LOV_AUTO_STRING + q + ""
 				+ "&type=" + type;
 
@@ -127,7 +128,8 @@ public class LOVConnector implements Constants {
 		
 		// build the string and URL
 		String s = LOV_API_VOCAB + "list";
-	    s += URLEncoder.encode("UTF-8");
+	    //s += URLEncoder.encode("UTF-8");
+	    s += URLEncoder.encode(s, "UTF-8");
 	    URL url = new URL(s);
 	 
 	    // read from the URL
@@ -138,9 +140,9 @@ public class LOVConnector implements Constants {
 	    scan.close();
 	 
 	    // build a JSON object
-	    JSONObject obj = new JSONObject(str);
+	    obj = new JSONObject(str);
 	    if (! obj.getString("status").equals("OK"))
-	        return;
+	        return null;
 		/* todo: parse the result prefix, title + uri + description
 	    JSONArray arr = obj.getJSONArray("titles");
 	    for (int i = 0; i < arr.length(); i++)
@@ -164,7 +166,8 @@ public class LOVConnector implements Constants {
 		// build the string and URL
 		String st = LOV_API_VOCAB + "info"  + "?vocab="
 				+ "" + vocab;
-		st += URLEncoder.encode("UTF-8");
+		//st += URLEncoder.encode("UTF-8");
+		st += URLEncoder.encode(st, "UTF-8");
 		URL url = new URL(st);
 		
 		// read from the URL
@@ -175,9 +178,9 @@ public class LOVConnector implements Constants {
 	    scan.close();
 	 
 	    // build a JSON object
-	    JSONObject result = new JSONObject(str);
+	    result = new JSONObject(str);
 	    if (! result.getString("status").equals("OK"))
-	        return;
+	        return null;
 	    
 		
 		return result;
