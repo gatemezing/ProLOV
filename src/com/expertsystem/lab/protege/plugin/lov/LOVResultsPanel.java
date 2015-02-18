@@ -50,7 +50,7 @@ public class LOVResultsPanel extends JPanel {
 		setLayout(new BorderLayout());
 		add_button = new MListAddButton(add_listener);
 		text = new JLabel();		
-		text.setFont(new Font(text.getFont().getName(), Font.PLAIN, 12));
+		text.setFont(new Font(text.getFont().getName(), Font.PLAIN, 10));
 		text.setText("<html> <img src='http://lov.okfn.org/img/LOV.png' height='47' width='47' style='float:left;margin:0 5px 0 0;'/> "
 				+ "LOV stands for Linked Open Vocabularies. <br> "
 				+ "This name is derived from LOD, standing for Linked Open Data. <br>"
@@ -101,10 +101,8 @@ public class LOVResultsPanel extends JPanel {
 	}
 
 	public void updateLOVResults(){
-		this.removeAll();		
-
-		setLayout(new BorderLayout());
-
+		this.removeAll();
+		
 		List<ResultsListItem> results = new ArrayList<ResultsListItem>();
 		results.add(new ResultsListItem(local_name, "foaf", "http://xmlns.com/foaf/0.1/Person", "2,320,027", "72", "A person", "Person", 0.707));
 		results.add(new ResultsListItem(local_name, "bbccore", "http://www.bbc.co.uk/ontologies/coreconcepts/Person", "", "", "", "Person @en-gb", 0.556));
@@ -125,7 +123,7 @@ public class LOVResultsPanel extends JPanel {
 		list_results.setCellRenderer(new ResultsListCellRenderer());
 
 		JScrollPane sp = ComponentFactory.createScrollPane(list_results);
-		add(sp);		
+		add(sp, BorderLayout.CENTER);			
 	}	
 
 	private class ResultsListCellRenderer extends DefaultListCellRenderer{
@@ -136,17 +134,16 @@ public class LOVResultsPanel extends JPanel {
 		public Component getListCellRendererComponent(JList list, Object value,
 				int index, boolean isSelected, boolean cellHasFocus) {
 
-			setOpaque(true);
-			setLayout(new BorderLayout());
 			JPanel r = new JPanel();
+			r.setLayout(new BorderLayout());
 			JLabel label = new JLabel();
 
 			ResultsListItem item = (ResultsListItem) value;
-			String text = "<html><div style='font-size: 11px;'><b>" + item.getPrefix() + ":" +item.getName() 
+			String text = "<html><div style='font-size: 9px;'><b>" + item.getPrefix() + ":" +item.getName() 
 					+ "</b> (" + item.getPrefix() + ")&nbsp;&nbsp;&nbsp;&nbsp;" + item.getConfidence() + "</div> <br>";
 
 			if(!item.getNum_ocurrences().equals("") && !item.getNum_datasets().equals("")){
-				text += item.getNum_ocurrences() + "occurrences in "+ item.getNum_datasets() + " LOD datasets <br>";
+				text += item.getNum_ocurrences() + " occurrences in "+ item.getNum_datasets() + " LOD datasets <br>";
 			}
 
 			text += "<a href='" + item.getUrl_vocab() + "'>" + item.getUrl_vocab() + "</a> <br>"; 
@@ -161,34 +158,12 @@ public class LOVResultsPanel extends JPanel {
 
 			text += "<font color='green'> localName </font>" + item.getName();
 			text += "</html>";
+			
 			label.setText(text);
-			label.setFont(new Font(label.getFont().getName(), Font.PLAIN, 12));
-			/*label.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createMatteBorder(0,
-					0,
-					1,
-					0,
-					Color.LIGHT_GRAY),
-					BorderFactory.createEmptyBorder(5, 2, 5, 2)));*/
-
+			label.setFont(new Font(label.getFont().getName(), Font.PLAIN, 10));
 			r.add(label, BorderLayout.WEST);
 
-			return r;
-
-			/*JLabel label = (JLabel) super.getListCellRendererComponent(list,
-					value,
-					index,
-					isSelected,
-					cellHasFocus);
-			ResultsListItem nameObject = (ResultsListItem) value;                
-			label.setText(nameObject.getTooltip());
-			label.setFont(new Font(label.getFont().getName(), Font.PLAIN, 12));
-			label.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createMatteBorder(0,
-					0,
-					1,
-					0,
-					Color.LIGHT_GRAY),
-					BorderFactory.createEmptyBorder(5, 2, 5, 2)));
-			return label;*/
+			return r;			
 		}		 
 	}
 }
