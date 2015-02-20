@@ -22,8 +22,10 @@ Protégé Plug in development
 Use Cases document
 =================
   - Use Cases GDoc https://docs.google.com/document/d/1GDbeKMP6608XzlCGzrm5jWLJY3mU-4MLLsgIuZejqvU/edit?usp=sharing 
+  - 
+  
 Deadlines
-========
+==========
   - [ ] 12/1/2015: Call to see the evolution of the plugin (and every Wednesday until 13/03/2015
   - [ ] 20/01/2015: another call for looking at inserting a small plugin
   - [ ] More here 
