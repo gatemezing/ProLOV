@@ -35,5 +35,5 @@ Target conferences
 =================
   - [ ] ESWC 2015, DEMO session (Deadline: 13/03/2015)
   - [ ] ISWC 2015, with users evaluation, ontology track (long paper)
-  - [ ] Semantics 2015 (long paper)
+  - [ ] Semantics 2015 (long paper) (May 22, 2015) http://semantics.cc/
   
