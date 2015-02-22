@@ -22,6 +22,8 @@
 \usepackage{color}
 \newtheorem{deflda}{Axiom}
 \newcommand{\todo}[1]{\noindent\textcolor{red}{{\bf \{TODO}: #1{\bf \}}}}
+\newcommand{\neon}{NeOn }
+\newcommand{\protege}{Prot{\'e}g{\'e}}
 
 % Language Definitions for Turtle
 \definecolor{olivegreen}{rgb}{0.2,0.8,0.5}
@@ -49,10 +51,11 @@ morestring=[b][\color{blue}]\",
 \institute{
 Expert System Iberia, Campo de las Naciones, Madrid, Spain. \\
 \and MONDECA, 35 boulevard de Strasbourg, Paris, France .\\
-\email{ngarcia@expertsystem.com,gatemezing@eurecom,bvillazon@expertsystem.com \\
+\email{ngarcia@expertsystem.com,ghislain.atemezing@mondeca.com,bvillazon@expertsystem.com \\
 }
 }  
 
+\authorrunning{Nuria Garc\'ia, G.A. Atemezing, B. Villaz{\'o}n}
 \maketitle
 
 %%%%%%%%%%%%%%%%%%
@@ -74,13 +77,16 @@ Here goes the abstract in less than 200 words.
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%  2. Related work  %%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Related Work}\label{sec:soa}
 \input{relatedwork}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  3.LOV APIs Description  %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Linked Open Vocabulaires (LOV)}\label{sec:lov}
 \input{lov}
@@ -88,7 +94,7 @@ Here goes the abstract in less than 200 words.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%  3.ProtegeLOV Description  %%%
+%%%  4.ProtegeLOV Description  %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Prot{\'e}g{\'e}LOV}\label{sec:classification}
@@ -96,7 +102,7 @@ Here goes the abstract in less than 200 words.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%  4. Conclusion and Future Work  %%%
+%%%  5. Conclusion and Future Work  %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Evaluation and Future Work}\label{sec:conclusion}
@@ -109,7 +115,7 @@ Here goes the abstract in less than 200 words.
 %%%%%%%%%%%%%%%%%%%%%%%%%
 
 \paragraph{\textbf{Acknowledgments.}} %\label{sec:acknowledgments}
-Thanks to Pierre-Yves and the LOV team for providing and maintaining a curated vocabularies and API access. We want to thank Antoine Zimmermann for the discussion we have long time ago.
+Thanks to Pierre-Yves and the LOV team for providing and maintaining a curated vocabularies and API access.
 % More acknowledgments here
 
 \bibliographystyle{abbrv}
