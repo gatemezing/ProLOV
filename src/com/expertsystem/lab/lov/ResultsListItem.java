@@ -17,8 +17,8 @@ public class ResultsListItem implements MListItem {
 		this.name = name;
 		this.prefix = "";
 		this.url_vocab = "";
-		this.num_ocurrences = "";
-		this.num_datasets = "";
+		this.num_ocurrences = "0";
+		this.num_datasets = "0";
 		this.comment = "";
 		this.label = "";
 		this.confidence = 0.0;

@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.Graphics2D;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,7 @@ import javax.swing.JScrollPane;
 import org.protege.editor.core.ui.list.MList;
 import org.protege.editor.core.ui.list.MListAddButton;
 import org.protege.editor.core.ui.list.MListButton;
+import org.protege.editor.core.ui.list.MListEditButton;
 import org.protege.editor.core.ui.util.ComponentFactory;
 
 import com.expertsystem.lab.lov.ResultsListItem;
@@ -35,20 +37,30 @@ import com.expertsystem.lab.lov.ResultsListItem;
 public class LOVResultsPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
+	//private static final Color ROLL_OVER_COLOR = new Color(50, 50, 255);
 
 	private JLabel text;
 	private MList list_results;	
 	private MListAddButton add_button;
+	private MListEditButton edit_button;
+	private MListSubEntityButton subEntity_button;
 	private String local_name;
 	private String label_name;
 	private String type;	
 
-	public LOVResultsPanel (ActionListener add_listener){		
+	public LOVResultsPanel (ActionListener add_listener, ActionListener edit_listener, ActionListener subclass_listener){		
 		this.local_name = "Thing";
 		this.label_name = "Thing";
-		this.type = "Class";
+		this.type = "class"; 
 		setLayout(new BorderLayout());
 		add_button = new MListAddButton(add_listener);
+		edit_button = new MListEditButton(edit_listener);
+		subEntity_button = new MListSubEntityButton(subclass_listener);
+		init();	
+	}
+
+	public void init(){
+		this.removeAll();
 		text = new JLabel();		
 		text.setFont(new Font(text.getFont().getName(), Font.PLAIN, 10));
 		text.setText("<html> <img src='http://lov.okfn.org/img/LOV.png' height='47' width='47' style='float:left;margin:0 5px 0 0;'/> "
@@ -63,9 +75,9 @@ public class LOVResultsPanel extends JPanel {
 				0,
 				1,
 				0,
-				Color.LIGHT_GRAY),
+				Color.WHITE),
 				BorderFactory.createEmptyBorder(2, 35, 5, 2)));
-		add(text, BorderLayout.CENTER);		
+		add(text, BorderLayout.CENTER);	
 	}
 
 	public String getLocal_name() {
@@ -100,21 +112,17 @@ public class LOVResultsPanel extends JPanel {
 		this.list_results = list_results;
 	}
 
-	public void updateLOVResults(){
+	public void updateLOVResults(List<ResultsListItem> results){
 		this.removeAll();
-		
-		List<ResultsListItem> results = new ArrayList<ResultsListItem>();
-		results.add(new ResultsListItem(local_name, "foaf", "http://xmlns.com/foaf/0.1/Person", "2,320,027", "72", "A person", "Person", 0.707));
-		results.add(new ResultsListItem(local_name, "bbccore", "http://www.bbc.co.uk/ontologies/coreconcepts/Person", "", "", "", "Person @en-gb", 0.556));
-		results.add(new ResultsListItem(local_name, "sport", "http://www.bbc.co.uk/ontologies/sport/Person", "", "", "An athlete or other person with typically a @en-gb", "Person @en-gb", 0.526));
-		results.add(new ResultsListItem(local_name, "schema", "http://schema.org/Person", "980,153", "2", "A person (alive, dead, undead, or fictional). ", "Person", 0.507));
 
 		list_results = new MList(){			
 			private static final long serialVersionUID = 1L;
 
 			protected List<MListButton> getButtons(Object value) {
 				List<MListButton> buttons  = new ArrayList<MListButton>(super.getButtons(value));
-				buttons.add(add_button);            
+				buttons.add(subEntity_button);
+				buttons.add(edit_button);
+				buttons.add(add_button); 				
 				return buttons;
 			}
 		};
@@ -123,7 +131,7 @@ public class LOVResultsPanel extends JPanel {
 		list_results.setCellRenderer(new ResultsListCellRenderer());
 
 		JScrollPane sp = ComponentFactory.createScrollPane(list_results);
-		add(sp, BorderLayout.CENTER);			
+		add(sp, BorderLayout.CENTER);		
 	}	
 
 	private class ResultsListCellRenderer extends DefaultListCellRenderer{
@@ -142,7 +150,7 @@ public class LOVResultsPanel extends JPanel {
 			String text = "<html><div style='font-size: 9px;'><b>" + item.getPrefix() + ":" +item.getName() 
 					+ "</b> (" + item.getPrefix() + ")&nbsp;&nbsp;&nbsp;&nbsp;" + item.getConfidence() + "</div> <br>";
 
-			if(!item.getNum_ocurrences().equals("") && !item.getNum_datasets().equals("")){
+			if(!item.getNum_ocurrences().equals("0") && !item.getNum_datasets().equals("0")){
 				text += item.getNum_ocurrences() + " occurrences in "+ item.getNum_datasets() + " LOD datasets <br>";
 			}
 
@@ -158,7 +166,7 @@ public class LOVResultsPanel extends JPanel {
 
 			text += "<font color='green'> localName </font>" + item.getName();
 			text += "</html>";
-			
+
 			label.setText(text);
 			label.setFont(new Font(label.getFont().getName(), Font.PLAIN, 10));
 			r.add(label, BorderLayout.WEST);
@@ -166,4 +174,20 @@ public class LOVResultsPanel extends JPanel {
 			return r;			
 		}		 
 	}
+	
+	 private class MListSubEntityButton extends MListButton {
+
+	        protected MListSubEntityButton(ActionListener subclass_listener) {
+	            super("Add subclass", Color.DARK_GRAY.darker(), subclass_listener);
+	        }
+
+	        public void paintButtonContent(Graphics2D g) {
+	            int w = getBounds().width;
+	            int h = getBounds().height;
+	            int x = getBounds().x;
+	            int y = getBounds().y;
+	            g.drawOval(x + 3, y + 3, 6, 6);
+	            g.drawLine(x + 8, y + 8, x + w - 5, y + h - 5);
+	        }
+	    }
 }
