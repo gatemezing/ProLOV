@@ -48,7 +48,7 @@
 				<extensions>true</extensions>
 				<configuration>
 					<instructions>
-						<Bundle-ClassPath>.,json-20141113.jar</Bundle-ClassPath>
+						<Bundle-ClassPath>.,json-20140107.jar</Bundle-ClassPath>
 						<Bundle-SymbolicName>${project.artifactId};singleton:=true</Bundle-SymbolicName>
 						<Bundle-Vendor>The Protege Development Team</Bundle-Vendor>
 						<Import-Package>
@@ -57,7 +57,7 @@
 							org.protege.editor.owl.*;version="4.3",
 							*
 						</Import-Package>
-						<Include-Resource>plugin.xml, {maven-resources},lib/json-20141113.jar</Include-Resource>
+						<Include-Resource>plugin.xml, {maven-resources},lib/json-20140107.jar</Include-Resource>
 						<Private-Package>skeleton</Private-Package>
 					</instructions>
 					<executions>

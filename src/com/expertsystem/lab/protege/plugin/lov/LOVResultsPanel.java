@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,9 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import org.protege.editor.core.ui.list.MList;
-import org.protege.editor.core.ui.list.MListAddButton;
 import org.protege.editor.core.ui.list.MListButton;
-import org.protege.editor.core.ui.list.MListEditButton;
 import org.protege.editor.core.ui.util.ComponentFactory;
 
 import com.expertsystem.lab.lov.ResultsListItem;
@@ -37,7 +36,6 @@ import com.expertsystem.lab.lov.ResultsListItem;
 public class LOVResultsPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	//private static final Color ROLL_OVER_COLOR = new Color(50, 50, 255);
 
 	private JLabel text;
 	private MList list_results;	
@@ -53,7 +51,7 @@ public class LOVResultsPanel extends JPanel {
 		this.label_name = "Thing";
 		this.type = "class"; 
 		setLayout(new BorderLayout());
-		add_button = new MListAddButton(add_listener);
+		add_button = new MListAddButton(add_listener);		
 		edit_button = new MListEditButton(edit_listener);
 		subEntity_button = new MListSubEntityButton(subclass_listener);
 		init();	
@@ -120,9 +118,9 @@ public class LOVResultsPanel extends JPanel {
 
 			protected List<MListButton> getButtons(Object value) {
 				List<MListButton> buttons  = new ArrayList<MListButton>(super.getButtons(value));
-				buttons.add(subEntity_button);
+				buttons.add(subEntity_button);				
+				buttons.add(add_button); 		
 				buttons.add(edit_button);
-				buttons.add(add_button); 				
 				return buttons;
 			}
 		};
@@ -174,20 +172,60 @@ public class LOVResultsPanel extends JPanel {
 			return r;			
 		}		 
 	}
+
+	private class MListSubEntityButton extends MListButton {
+
+		protected MListSubEntityButton(ActionListener subentity_listener) {
+			super("Add Sub-entity", Color.DARK_GRAY.darker(), subentity_listener);
+		}
+
+		public void paintButtonContent(Graphics2D g) {
+			int w = getBounds().width;
+			int h = getBounds().height;
+			int x = getBounds().x;
+			int y = getBounds().y;
+			g.drawOval(x + 3, y + 3, 6, 6);
+			g.drawLine(x + 8, y + 8, x + w - 5, y + h - 5);
+		}
+	}
+
+	private class MListAddButton extends MListButton {
+
+		protected MListAddButton(ActionListener actionListener) {
+			super("Add Entity and Equivalent Axiom", Color.GREEN.darker(), actionListener);
+		}
+
+		public void paintButtonContent(Graphics2D g) {
+			int size = getBounds().height;
+			int thickness = (Math.round(size / 8.0f) / 2) * 2;
+
+			int x = getBounds().x;
+			int y = getBounds().y;
+
+			int insetX = size / 4;
+			int insetY = size / 4;
+			int insetHeight = size / 2;
+			int insetWidth = size / 2;
+			g.fillRect(x + size / 2  - thickness / 2, y + insetY, thickness, insetHeight);
+			g.fillRect(x + insetX, y + size / 2 - thickness / 2, insetWidth, thickness);
+		}
+	}
 	
-	 private class MListSubEntityButton extends MListButton {
+	private class MListEditButton extends MListButton {
 
-	        protected MListSubEntityButton(ActionListener subclass_listener) {
-	            super("Add subclass", Color.DARK_GRAY.darker(), subclass_listener);
-	        }
-
-	        public void paintButtonContent(Graphics2D g) {
-	            int w = getBounds().width;
-	            int h = getBounds().height;
-	            int x = getBounds().x;
-	            int y = getBounds().y;
-	            g.drawOval(x + 3, y + 3, 6, 6);
-	            g.drawLine(x + 8, y + 8, x + w - 5, y + h - 5);
-	        }
+	    protected MListEditButton(ActionListener actionListener) {
+	        super("Reuse Directly", new Color(20, 80, 210), actionListener);
 	    }
+
+	    public void paintButtonContent(Graphics2D g) {
+	        Rectangle bounds = getBounds();
+	        int x = bounds.x;
+	        int y = bounds.y;
+	        int size = bounds.width;
+	        int quarterSize = (Math.round(bounds.width / 4.0f) / 2) * 2;
+	        g.fillOval(x + size / 2 - quarterSize, y + size / 2 - quarterSize, 2 * quarterSize, 2 * quarterSize);
+	        g.setColor(getBackground());
+	        g.fillOval(x + size / 2 - quarterSize / 2, y + size / 2 - quarterSize / 2, quarterSize, quarterSize);
+	    }
+	}
 }

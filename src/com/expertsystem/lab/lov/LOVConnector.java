@@ -51,7 +51,7 @@ public class LOVConnector implements Constants {
 
 	public JSONObject searchTerm(String q, String type){
 		HttpURLConnection connection;
-		JSONObject json = null;
+		JSONObject json = null;		
 		String query = LOV_QUERY_STRING + q + ""
 				+ "&type=" + type;
 
@@ -87,63 +87,67 @@ public class LOVConnector implements Constants {
 	}
 
 	public List<ResultsListItem> parseTerms(JSONObject json){
-		List<ResultsListItem> results = new ArrayList<ResultsListItem>();
+		List<ResultsListItem> results = null;
 
-		this.total_results = json.getInt("total_results");
-		//System.out.println(total_results);
-		
-		if(total_results > 0){
-			JSONArray terms = (JSONArray) json.get("results");
-			for (int i=0; i < terms.length(); i++) {
-				JSONObject data = (JSONObject) terms.get(i);
-				
-				//Local Name
-				String prefixName = data.getJSONArray("prefixedName").get(0).toString();
-				String local_name = prefixName.substring(prefixName.lastIndexOf(':') + 1);
-				//System.out.println(local_name);
-				
-				//Prefix
-				String prefix = data.getJSONArray("vocabulary.prefix").get(0).toString();
-				//System.out.println(prefix);
-				
-				//Occurrences
-				String ocurrences = data.getJSONArray("metrics.occurrencesInDatasets").get(0).toString();
-				//System.out.println(ocurrences);
-				
-				//Datasets
-				String datasets = data.getJSONArray("metrics.reusedByDatasets").get(0).toString();
-				//System.out.println(datasets);
-				
-				//Uri
-				String uri = data.getJSONArray("uri").get(0).toString();
-				//System.out.println(uri);
-				
-				//Confidence
-				double score = data.getDouble("score");
-				//System.out.println(score);
-				
-				JSONObject highlight = data.getJSONObject("highlight");
-				//Comment
-				String comment = "";
-				if(!highlight.isNull("http://www.w3.org/2000/01/rdf-schema#comment")){
-					comment = highlight.getJSONArray("http://www.w3.org/2000/01/rdf-schema#comment").get(0).toString();
-					//comment = comment.replaceAll("\"", " ");
-					//comment = comment.replace('"', '\"');
-					//System.out.println(comment);
-					
+		if(json != null){
+			results = new ArrayList<ResultsListItem>();
+
+			this.total_results = json.getInt("total_results");
+			//System.out.println(total_results);
+
+			if(total_results > 0){
+				JSONArray terms = (JSONArray) json.get("results");
+				for (int i=0; i < terms.length(); i++) {
+					JSONObject data = (JSONObject) terms.get(i);
+
+					//Local Name
+					String prefixName = data.getJSONArray("prefixedName").get(0).toString();
+					String local_name = prefixName.substring(prefixName.lastIndexOf(':') + 1);
+					//System.out.println(local_name);
+
+					//Prefix
+					String prefix = data.getJSONArray("vocabulary.prefix").get(0).toString();
+					//System.out.println(prefix);
+
+					//Occurrences
+					String ocurrences = data.getJSONArray("metrics.occurrencesInDatasets").get(0).toString();
+					//System.out.println(ocurrences);
+
+					//Datasets
+					String datasets = data.getJSONArray("metrics.reusedByDatasets").get(0).toString();
+					//System.out.println(datasets);
+
+					//Uri
+					String uri = data.getJSONArray("uri").get(0).toString();
+					//System.out.println(uri);
+
+					//Confidence
+					double score = data.getDouble("score");
+					//System.out.println(score);
+
+					JSONObject highlight = data.getJSONObject("highlight");
+					//Comment
+					String comment = "";
+					if(!highlight.isNull("http://www.w3.org/2000/01/rdf-schema#comment")){
+						comment = highlight.getJSONArray("http://www.w3.org/2000/01/rdf-schema#comment").get(0).toString();
+						//comment = comment.replaceAll("\"", " ");
+						//comment = comment.replace('"', '\"');
+						//System.out.println(comment);
+
+					}
+
+					//Label
+					String label = "";
+					if(!highlight.isNull("http://www.w3.org/2000/01/rdf-schema#label")){
+						label = highlight.getJSONArray("http://www.w3.org/2000/01/rdf-schema#label").get(0).toString();
+						//System.out.println(label);
+					}
+
+					ResultsListItem item = new ResultsListItem(local_name, prefix, uri, ocurrences, datasets, comment, label, score);
+					results.add(item);
 				}
-				
-				//Label
-				String label = "";
-				if(!highlight.isNull("http://www.w3.org/2000/01/rdf-schema#label")){
-					label = highlight.getJSONArray("http://www.w3.org/2000/01/rdf-schema#label").get(0).toString();
-					//System.out.println(label);
-				}
-				
-				ResultsListItem item = new ResultsListItem(local_name, prefix, uri, ocurrences, datasets, comment, label, score);
-				results.add(item);
 			}
-		}
+		}		
 		return results;
 	}
 
@@ -265,15 +269,15 @@ public class LOVConnector implements Constants {
 	 */
 
 
-	public static void main(String[] args){
+	/*public static void main(String[] args){
 		//LOVConnector lovapi = new LOVConnector();
 		//lovapi.searchTerm("Scale", "class");
 		//lovapi.parseTerms(lovapi.searchTerm("Scale", "class"));
-		
-		/*String uri = "http://www.aktors.org/ontology/portal#Person";
+
+		String uri = "http://www.aktors.org/ontology/portal#Person";
 		String name = "Person";
-		
+
 		String base_uri = uri.substring(0, uri.length() - name.length());
-		System.out.println(base_uri);*/
-	}
+		System.out.println(base_uri);
+	}*/
 }

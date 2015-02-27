@@ -71,25 +71,34 @@ public class LOView extends AbstractOWLViewComponent {
 			if(e.getSource() == selectionButton){
 				updateListLOV();				
 			}			
+		}		
+	};
+	
+	public void updateListLOV() {
+		String type_lov = lsp.getType();
+		if(type_lov.equals("objectproperty")){
+			type_lov = "property";
 		}
-
-		private void updateListLOV() {
-			String type_lov = lsp.getType();
-			if(type_lov.equals("objectproperty")){
-				type_lov = "property";
-			}
-			if(type_lov.equals("dataproperty")){
-				type_lov = "datatype";
-			}
-			if(type_lov.equals("namedindividual")){
-				type_lov = "instance";
-			}			
-			List<ResultsListItem> r = connector.parseTerms(connector.searchTerm(lsp.getLocal_name_value(), type_lov));
+		if(type_lov.equals("dataproperty")){
+			type_lov = "datatype";
+		}
+		if(type_lov.equals("namedindividual")){
+			type_lov = "instance";
+		}		
+		String query = lsp.getLocal_name_value();
+		if(!query.equals(lsp.getLabel_value())){
+			query += "," + lsp.getLabel_value();
+		}
+		List<ResultsListItem> r = connector.parseTerms(connector.searchTerm(lsp.getLocal_name_value(), type_lov));
+		if(r == null){
+			status.setText("Error Status: Connection problem API LOV - Access down");			
+		}
+		else{
 			status.setText("Total Results (" + lsp.getLocal_name_value() + "): " + connector.getTotal_results());	
 			lrp.updateLOVResults(r);
 			lrp.updateUI();
-		}
-	};
+		}			
+	}
 
 	private ActionListener add_listener = new ActionListener() {
 
@@ -98,6 +107,7 @@ public class LOView extends AbstractOWLViewComponent {
 			if (lrp.getList_results().getSelectedValue() instanceof ResultsListItem) {
 				ResultsListItem item = (ResultsListItem) lrp.getList_results().getSelectedValue();
 				handleAdd(item);
+				updateListLOV();
 			}
 		}
 
@@ -142,9 +152,9 @@ public class LOView extends AbstractOWLViewComponent {
 				//List<OWLOntologyChange> changes = new ArrayList<OWLOntologyChange>();
 				if (set != null){
 					if(parent == null){
-						//OWLEntity newEntity = set.getOWLEntity();
+						OWLEntity newEntity = set.getOWLEntity();
 						getOWLModelManager().applyChanges(set.getOntologyChanges());
-						//getOWLWorkspace().getOWLSelectionModel().setSelectedEntity(newEntity);
+						getOWLWorkspace().getOWLSelectionModel().setSelectedEntity(newEntity);
 					}
 					else{
 						createSubEntity(parent, set);
@@ -198,6 +208,7 @@ public class LOView extends AbstractOWLViewComponent {
 			if (lrp.getList_results().getSelectedValue() instanceof ResultsListItem) {
 				ResultsListItem item = (ResultsListItem) lrp.getList_results().getSelectedValue();
 				handleEdit(item);
+				updateListLOV();
 			}
 		}
 
@@ -228,6 +239,7 @@ public class LOView extends AbstractOWLViewComponent {
 			if (lrp.getList_results().getSelectedValue() instanceof ResultsListItem) {
 				ResultsListItem item = (ResultsListItem) lrp.getList_results().getSelectedValue();
 				handleSubEntity(item);
+				updateListLOV();
 			}
 		}
 
@@ -268,7 +280,7 @@ public class LOView extends AbstractOWLViewComponent {
 		getOWLModelManager().applyChanges(changes);
 		getOWLWorkspace().getOWLSelectionModel().setSelectedEntity(child);
 	}
-	
+
 	public void createEquivalentEntity(OWLEntity entityA, OWLEntityCreationSet<OWLEntity> set){
 		List<OWLOntologyChange> changes = new ArrayList<OWLOntologyChange>();
 		OWLDataFactory df = getOWLModelManager().getOWLDataFactory();
