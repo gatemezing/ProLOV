@@ -13,7 +13,7 @@ e.g. http://lov.okfn.org/dataset/lov/api/v2/search?q=Person&type=class for "Pers
   - http://lov.okfn.org/dataset/lov/api/v2/search?q={TERM}&type=property for querying {TERM} as a property
 e.g.: http://lov.okfn.org/dataset/lov/api/v2/search?q=Person&type=property
 
-Protégé Plug in development
+Protégé Plugin development 
 ===========================
   - https://github.com/protegeproject/protege/wiki/Building-from-Source (v5)
   - http://protegewiki.stanford.edu/wiki/CompileProtege5InEclipseWithMaven  
@@ -22,13 +22,13 @@ Protégé Plug in development
 Use Cases document
 =================
   - Use Cases GDoc https://docs.google.com/document/d/1GDbeKMP6608XzlCGzrm5jWLJY3mU-4MLLsgIuZejqvU/edit?usp=sharing 
-  - 
   
-Deadlines
+  
+Skype Calls
 ==========
   - [ ] 12/1/2015: Call to see the evolution of the plugin (and every Wednesday until 13/03/2015
   - [ ] 20/01/2015: another call for looking at inserting a small plugin
-  - [ ] More here 
+  - [ ] Every week until the submission at ESWC 2015 
   
 
 Target conferences
