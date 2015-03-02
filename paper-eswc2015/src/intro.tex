@@ -1,9 +1,14 @@
-So far, Linked Data principles and practices are being adopted by an increasing number of data providers, getting as result a global data space on the Web containing hundreds of LOD datasets \cite{Heath_Bizer_2011}. There are already several guidelines for generating, publishing, interlinking, and consuming Linked Data \cite{}. An important task, within the generation process, is to build the vocabulary to be used for modelling the domain of the data sources, and the common recommendation is to reuse as much as possible available vocabularies \cite{}. This reuse approach speeds up the vocabulary development, and therefore, publishers will save time, efforts, and resources. 
+So far, Linked Data principles and practices are being adopted by an increasing number of data providers, getting as result a global data space on the Web containing hundreds of LOD datasets \cite{Heath_Bizer_2011}. There are already several guidelines for generating, publishing, interlinking, and consuming Linked Data \cite{}. An important task, within the generation process, is to build the vocabulary to be used for modelling the domain of the data sources, and the common recommendation is to reuse as much as possible available vocabularies \cite{Heath_Bizer_2011,hyland14}. This reuse approach speeds up the vocabulary development, and therefore, publishers will save time, efforts, and resources. 
 
+<<<<<<< HEAD
 At the time of writing we have not found specific and detailed guidelines that describe how to reuse available vocabularies when building vocabularies. There are research efforts, like the NeOn Methodology \cite{}, and the W3C Working Group Note \cite{}, but they do not provide guidelines on how to reuse vocabularies at low fine grained, i.e., reusing specific classes and properties. Our claim is that this difficulty in how to reuse vocabularies at low fine grained is one of major barriers to the vocabulary development and in consequence to deployment of high quality datasets in Linked Data.
+=======
+At the time of writing we have not found specific and detailed guidelines that describe how to reuse available vocabularies when building vocabularies. There are research efforts, like the NeOn Methodology \cite{suarezfigueroa2012ontology}, the Best Practices for Publishing Linked Data - W3C Working Group Note \cite{hyland14}, and the work proposed by Lonsdale et al. \cite{Lonsdale2010318} but they do not provide guidelines on how to reuse vocabularies at low fine grained, i.e., reusing specific classes and properties. Our claim is that this difficulty in how to reuse vocabularies at low fine grained is one of major barriers to the vocabulary development and in consequence to deployment of Linked Data.
+>>>>>>> 6bdbd8bfd4c15c90360651a4db47412d77fdbf32
 
 In this paper we propose an initial set of guidelines for this task, and provide technological support by means of a plugin for \protege, which is one the popular framework for developing ontologies in a variety of formats including OWL, RDF(S), and XML Schema. It is backed by a strong community of developers and users in many domains. One success on \protege also lies on the availability to extend the core framework by adding more functionalities by means of plug-ins.
 
+<<<<<<< HEAD
 At the same time, the recent success of Linked Open Vocabularies (LOV\footnote{\url{http://lov.okfn.org/dataset/lov/}}) as a central point for curated catalogue of ontologies is helping to convey on best practices to publish vocabularies on the Web, as well as to help in the Data publication activity on the Web. LOV comes with many features, such as an API, a search function and a SPARQL endpoint.
  
 Moreover, we propose in this paper to explore, design and implement a plug-in of LOV in \protege for easing the development of ontologies by reusing existing vocabularies at low fine grained level. The tool has to improve the modeling and reuse of ontologies used in the LOD cloud, by providing the following features in \protege:
@@ -13,12 +18,16 @@ Moreover, we propose in this paper to explore, design and implement a plug-in of
 \item Propose to the user a list of candidate vocabularies in LOV matching the term
 \item Have an updating mechanism (synchronization) to LOV catalogue.
 \item Check if a new vocabulary created in \protege satisfied the LOV recommendations \cite{pybernard12}
+=======
+In this paper we propose an initial set of guidelines for this task, and provide technological support by means of a plugin for \protege, which is one the popular framework for developing ontologies in a variety of formats including OWL, RDF(S), and XML Schema. It is backed by a strong community of developers and users in many domains. One success on \protege also lies on the availability to extend the core framework adding new functionalities by means of plug-ins. In addition, we propose to explore, design and implement a plug-in of LOV in \protege for easing the development of ontologies by reusing existing vocabularies at low fine grained level. The tool has to improve the modeling and reuse of ontologies used in the LOD cloud.
+>>>>>>> 6bdbd8bfd4c15c90360651a4db47412d77fdbf32
 
 \item Suggest to LOV a new created vocabulary within \protege.
 \end{itemize}
 
 This paper presents \protege, a first implementation of the LOV realized as a plugin for the ontology editor \protege. 
  
+<<<<<<< HEAD
 \section{Methodological discussion? - based on Antoine discussions}
 The activity of building vocabularies by reusing available vocabularies consits of
 \begin{itemize}
@@ -30,6 +39,20 @@ The activity of building vocabularies by reusing available vocabularies consits 
 		\item Redefine your own terms. In this case you have full control of the terms. This may be a good choice if there is only poorly designed ontologies for the terms you need. Or, you may disagree with the definitions of the other ontologies. Or you are concerned by the fact that external ontologies may change at any time, possibly disappearing completely. In any case, if you have your own terms that mirror existing terms from other ontologies, you can also provide the correspondences between your terms and the others. In that case, I recommend that you provide those outside your ontology.		
 	\end{enumerate}
 		You can combine all the approaches, importing some ontologies (e.g., FOAF), reusing terms from others (e.g., Dublin Core) and making your own terms in some cases. The approach you choose in each case can be based on reasoning issues (expressiveness, size, conformance to DL, modularity), querying issues, robustness, linkage, reusability, taste, belief, mood, magnetic field, humour, weather, topology, spirituality, life :)
+=======
+\section{Reusing vocabulary elements when building ontologies}\label{sec:reuse}
+In this section we describe the procedure of reusing available vocabulary terms when building ontologies. In a nutshell, the task of building vocabularies by reusing available vocabulary terms consists of
+\begin{itemize}
+	\item Search for suitable vocabulary terms to reuse from the LOV repository. The search should be conducted by using the terms of the application domain.
+	\item Assess the set of candidate terms from LOV repository. In this particular case the results coming from LOV repository included a score for each term retrieved.
+	\item Select the most appropriate term taking into the account the score of the term.
+	\item Include the selected term in the ontology that has being developed. There are three alternatives 
+	\begin{itemize}
+		\item Include the external term and define the local axioms in the local ontology.
+		\item Include the external term, create a local term, and define the {\tt rdfs:subClassOf/ rdfs:suPropertyOf} axiom to related both terms.
+		\item Include the external term, create a local term, and define the {\tt owl:equivalentClass/ owl:equivalentProperty} axiom to relate both terms. It is possible to include local axioms to the local term.				
+	\end{itemize}
+>>>>>>> 6bdbd8bfd4c15c90360651a4db47412d77fdbf32
 \end{itemize}
 
 
