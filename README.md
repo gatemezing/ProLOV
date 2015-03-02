@@ -23,6 +23,11 @@ Use Cases document
 =================
   - Use Cases GDoc https://docs.google.com/document/d/1GDbeKMP6608XzlCGzrm5jWLJY3mU-4MLLsgIuZejqvU/edit?usp=sharing 
   
+Evaluation survey
+==================
+   - First version for the beta version, survey  at http://tinyurl.com/surveyProtegeLOV 
+
+  
   
 Skype Calls
 ==========
