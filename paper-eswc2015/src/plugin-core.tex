@@ -2,28 +2,37 @@ Prot{\'e}g{\'e}LOV it is an open source tool that provides support to the method
 
 Prot{\'e}g{\'e}LOV provides the following functionalities 
 
-\paragraph{Search for a particular term (class or property) in LOV repository}. %The user selects a particular 
+\subsubsection{Search for a particular term (class or property) in LOV repository}. 
+The user selects a particular term from the \emph{Class}, \emph{Object property} or \emph{Data property} navigator. 
+Next, the user switches to the Linked Open Vocabularies View and performs a search on the LOV repository.
 
-\paragraph{Browse the list of terms, from LOV repository, which matches the search criteria}
+\subsubsection{Browse the list of terms, from LOV repository, which matches the search criteria}
+The system takes as input the selected term, and calls the LOV REST API to get the LOV terms that match the criteria.
+The plugin provides the following information (if it is available) for each term (1) URI, (2) score, (3) label, (4) local name, and (5) usage note.
 
-\paragraph{Reuse directly a particular term from LOV repository}
+\subsubsection{Reuse directly a particular term from LOV repository}
+The user selects the \emph{reuse directly} option. Next, the system replaces the selected term from the \emph{Class}, \emph{Object property} or \emph{Data property} navigator, and replaces by the selected term from LOV. 
 
-\paragraph{Add the particular term and define the rdf:subClassOf/rdfs:subPropertyOf axiom}
+\subsubsection{Add the particular term and define the owl:equivalentClass/owl:equivalentProperty axiom}
+The user selects the \emph{add entity and equivalent axiom} option. Next, the system includes the new term on the local ontology, and defines {{\tt owl:equivalentClass/ owl:equivalentProperty} axiom to relate both terms.
 
-\paragraph{Add the particular term and define the owl:equivalentClass/owl:equivalentProperty axiom}
+\subsubsection{Add the particular term and define the rdf:subClassOf/rdfs:subPropertyOf axiom}
+The user selects the \emph{add entity and sub-entity axiom} option. Next, the system includes the new term on the local ontology, and defines {\tt rdfs:subClassOf/ rdfs:suPropertyOf} axiom to related both terms.
 
 
-\begin{figure}[!bht]
-\center
-\includegraphics[scale=0.5]{img/LOVmockup.png}
-\label{fig:LOVresults}
-\caption{Panel showing the results for searching a term in the class hierarchy.}
-\end{figure}
+Figure\ref{fig:LOVoptions} depicts the three main actions the user perform on the selected LOV term 
+
+%\begin{figure}[!bht]
+%\center
+%\includegraphics[scale=0.5]{img/LOVmockup.png}
+%\label{fig:LOVresults}
+%\caption{Panel showing the results for searching a term in the class hierarchy.}
+%\end{figure}
 
 
 \begin{figure}[!bht]
 \center
 \includegraphics[scale=0.5]{img/LOVOptions.png}
-\caption{Three actions currently available in the plugin after looking up a term in LOV catalogue: (a) reuse direct, (b) add equivalent axiom and (c) add subClass axiom}
+\caption{Three actions currently available in the plugin after looking up a term in LOV catalogue: (a) reuse it directly, (b) add equivalent axiom and (c) add subClass axiom}
 \label{fig:LOVoptions}
 \end{figure}
