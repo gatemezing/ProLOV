@@ -155,11 +155,15 @@ public class LOVResultsPanel extends JPanel {
 			text += "<a href='" + item.getUrl_vocab() + "'>" + item.getUrl_vocab() + "</a> <br>"; 
 
 			if(!item.getComment().equals("")){
-				text += "<font color='green'> rdfs:comment </font>" + item.getComment() + "<br>";
+				text += "<font color='green'> rdfs:comment </font>" + item.getComment();
 			}
 
 			if(!item.getLabel().equals("")){
-				text += "<font color='green'> rdfs:label </font>" + item.getLabel() + "<br>";
+				text += "<font color='green'> rdfs:label </font>" + item.getLabel();
+			}
+			
+			if(!item.getUsageNote().equals("")){
+				text += "<font color='green'> http://purl.org/vocab/vann/usageNote </font>" + item.getUsageNote();
 			}
 
 			text += "<font color='green'> localName </font>" + item.getName();

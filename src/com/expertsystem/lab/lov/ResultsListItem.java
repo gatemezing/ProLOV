@@ -11,6 +11,7 @@ public class ResultsListItem implements MListItem {
 	private String num_datasets;
 	private String comment;
 	private String label;
+	private String usageNote;
 	private double confidence;
 
 	public ResultsListItem(String name){
@@ -21,11 +22,12 @@ public class ResultsListItem implements MListItem {
 		this.num_datasets = "0";
 		this.comment = "";
 		this.label = "";
+		this.usageNote = "";
 		this.confidence = 0.0;
 	}	
 	
 	public ResultsListItem(String name, String prefix, String url_vocab, String num_ocurrences, String num_datasets, 
-			String comment, String label, double confidence){
+			String comment, String label, String usageNote, double confidence){
 		this.name = name;
 		this.prefix = prefix;
 		this.url_vocab = url_vocab;
@@ -33,6 +35,7 @@ public class ResultsListItem implements MListItem {
 		this.num_datasets = num_datasets;
 		this.comment = comment;
 		this.label = label;
+		this.usageNote = usageNote;
 		this.confidence = confidence;
 	}
 
@@ -90,6 +93,14 @@ public class ResultsListItem implements MListItem {
 
 	public void setLabel(String label) {
 		this.label = label;
+	}	
+
+	public String getUsageNote() {
+		return usageNote;
+	}
+
+	public void setUsageNote(String usageNote) {
+		this.usageNote = usageNote;
 	}
 
 	public double getConfidence() {

@@ -129,21 +129,64 @@ public class LOVConnector implements Constants {
 					//Comment
 					String comment = "";
 					if(!highlight.isNull("http://www.w3.org/2000/01/rdf-schema#comment")){
-						comment = highlight.getJSONArray("http://www.w3.org/2000/01/rdf-schema#comment").get(0).toString();
+						JSONArray array_comment = highlight.getJSONArray("http://www.w3.org/2000/01/rdf-schema#comment");
+						for(int j=0; j<array_comment.length(); j++){
+							comment += array_comment.getString(j) + "<br>";
+						}
+						//comment = highlight.getJSONArray("http://www.w3.org/2000/01/rdf-schema#comment").get(0).toString();
 						//comment = comment.replaceAll("\"", " ");
 						//comment = comment.replace('"', '\"');
 						//System.out.println(comment);
+					}
 
+					if(!highlight.isNull("http://www.w3.org/2000/01/rdf-schema#comment@en")){
+						JSONArray array_comment = highlight.getJSONArray("http://www.w3.org/2000/01/rdf-schema#comment@en");
+						for(int j=0; j<array_comment.length(); j++){
+							comment += array_comment.getString(j) + "<br>";
+						}
+						//comment = highlight.getJSONArray("http://www.w3.org/2000/01/rdf-schema#comment@en").get(0).toString();
+						//comment = comment.replaceAll("\"", " ");
+						//comment = comment.replace('"', '\"');
+						//System.out.println(comment);
 					}
 
 					//Label
 					String label = "";
 					if(!highlight.isNull("http://www.w3.org/2000/01/rdf-schema#label")){
-						label = highlight.getJSONArray("http://www.w3.org/2000/01/rdf-schema#label").get(0).toString();
+						JSONArray array_label = highlight.getJSONArray("http://www.w3.org/2000/01/rdf-schema#label");
+						for(int j=0; j<array_label.length(); j++){
+							label += array_label.getString(j) + "<br>";
+						}
+						//label = highlight.getJSONArray("http://www.w3.org/2000/01/rdf-schema#label").get(0).toString();
 						//System.out.println(label);
 					}
 
-					ResultsListItem item = new ResultsListItem(local_name, prefix, uri, ocurrences, datasets, comment, label, score);
+					if(!highlight.isNull("http://www.w3.org/2000/01/rdf-schema#label@en")){
+						JSONArray array_label = highlight.getJSONArray("http://www.w3.org/2000/01/rdf-schema#label@en");
+						for(int j=0; j<array_label.length(); j++){
+							label += array_label.getString(j) + "<br>";
+						}
+						//label = highlight.getJSONArray("http://www.w3.org/2000/01/rdf-schema#label@en").get(0).toString();
+						//System.out.println(label);
+					}
+
+					//UsageNote
+					String usageNote = "";
+					if(!highlight.isNull("http://purl.org/vocab/vann/usageNote")){
+						JSONArray array_usageNote = highlight.getJSONArray("http://purl.org/vocab/vann/usageNote");
+						for(int j=0; j<array_usageNote.length(); j++){
+							usageNote += array_usageNote.getString(j) + "<br>";
+						}						
+					}
+
+					if(!highlight.isNull("http://purl.org/vocab/vann/usageNote@en")){
+						JSONArray array_usageNote = highlight.getJSONArray("http://purl.org/vocab/vann/usageNote@en");
+						for(int j=0; j<array_usageNote.length(); j++){
+							usageNote += array_usageNote.getString(j) + "<br>";
+						}						
+					}
+
+					ResultsListItem item = new ResultsListItem(local_name, prefix, uri, ocurrences, datasets, comment, label, usageNote, score);
 					results.add(item);
 				}
 			}
