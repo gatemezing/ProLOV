@@ -4,7 +4,7 @@ package com.expertsystem.lab.lov;
  * 
  * Linked Open Vocabularies (LOV) Connector Constants 
  * 
- * @author Nuria Garcia <ngarcia@isoco.com>
+ * @author Nuria Garcia <ngarcia@expertsystem.com>
  * @author Ghislain Atemezing <ghislain.atemezing@gmail.com> 
  * @author boricles <boricles@gmail.com> 
  *
