@@ -20,7 +20,7 @@ import org.json.JSONObject;
  * 
  * Linked Open Vocabularies (LOV) API wrapper 
  * 
- * @author Nuria Garcia <ngarcia@isoco.com>
+ * @author Nuria Garcia <ngarcia@expertsystem.com>
  * @author Ghislain Atemezing <ghislain.atemezing@gmail.com> 
  * @author boricles <boricles@gmail.com> 
  *
