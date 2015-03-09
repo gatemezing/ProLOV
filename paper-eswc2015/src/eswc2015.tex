@@ -63,16 +63,15 @@ Expert System Iberia, Campo de las Naciones, Madrid, Spain. \\
 %%%%%%%%%%%%%%%%%%
 
 \begin{abstract}
-
-In the process of creating ontologies, it is widely accepted to reuse terms in existing well-known ontologies. Some recommendations exist to guide the ontologists in ontology engineering, but still hard to find a tool that provide users with an environment to reuse terms. This paper presents Prot{\'e}g{\'e}LOV, a plugin for the ontology editor Protege that combine the access to the Linked Open Vocabularies (LOV) during ontology modeling. It search a term in LOV and provide three actions if the term exists : (i) replace the selected term in the current ontology, (ii) add the rdfs:subClassOf axiom and (iv) add the owl:equivalentClass. Results from a preliminary user study indicate that Prot{\'e}g{\'e}LOV does provide an intuitive access and reuse of terms in external vocabularies.
-
-\keywords{Plugin, ontology engineering, LOV, Prot{\'e}g{\'e}} 
+Developing ontologies, by reusing already available and well-known ontologies, is commonly acknowledge to play a crucial role to facilitate inclusion and expansion of the Web of Data. Some recommendations exist to guide ontologists in ontology engineering, but they do not provide guidelines on how to reuse vocabularies at low fine grained, i.e., reusing specific classes and properties. Moreover, there is still hard to find a tool that provide users with an environment to reuse terms. This paper presents Prot{\'e}g{\'e}LOV, a plugin for the ontology editor Prot{\'e}g{\'e}, that combines the access to the Linked Open Vocabularies (LOV) during ontology modeling. It allows users to search a term in LOV and provides three actions if the term exists : (i) replace the selected term in the current ontology; (ii) add the {\tt rdfs:subClassOf} or {\tt rdfs:subPropretyOf} axiom between the selected term and the local term; and (iii) add the {\tt owl:equivalentClass} or {\tt owl:equivalentProperty} between the selected term and local term. Results from a preliminary user study indicate that Prot{\'e}g{\'e}LOV does provide an intuitive access and reuse of terms in external vocabularies.
+\keywords{ontology engineering, ontology reuse, LOV, Prot{\'e}g{\'e}, Plugin} 
 \end{abstract}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 %%%  1. Introduction  %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%
 
+\vspace{-3mm}
 \section{Introduction}\label{sec:introduction}
 \input{intro}
 
@@ -81,15 +80,18 @@ In the process of creating ontologies, it is widely accepted to reuse terms in e
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%  2. Related work  %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{-3mm}
 \section{Related Work}\label{sec:soa}
+\vspace{-3mm}
 \input{relatedwork}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%  3.LOV APIs Description  %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\vspace{-3mm}
 \section{Linked Open Vocabulaires (LOV)}\label{sec:lov}
+\vspace{-3mm}
 \input{lov}
 
 
@@ -97,7 +99,7 @@ In the process of creating ontologies, it is widely accepted to reuse terms in e
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%  4.ProtegeLOV Description  %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\vspace{-3mm}
 \section{Prot{\'e}g{\'e}LOV}\label{sec:classification}
 \input{plugin-core}
 
@@ -105,8 +107,8 @@ In the process of creating ontologies, it is widely accepted to reuse terms in e
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%  5. Conclusion and Future Work  %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Evaluation and Future Work}\label{sec:conclusion}
+\vspace{-3mm}
+\section{Evaluation}\label{sec:conclusion}
 \input{conclusions}
 
 
@@ -114,11 +116,11 @@ In the process of creating ontologies, it is widely accepted to reuse terms in e
 %%%%%%%%%%%%%%%%%%%%%%%%%
 %%%  Acknowledgments  %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%
-
+\vspace{-3mm}
 \paragraph{\textbf{Acknowledgments.}} %\label{sec:acknowledgments}
 Thanks to Pierre-Yves and the LOV team for providing and maintaining a curated vocabularies and API access.
 % More acknowledgments here
-
+\vspace{-3mm}
 \bibliographystyle{abbrv}
 \nocite{*}
 \bibliography{eswcbib}
