@@ -5,11 +5,15 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JLabel;
@@ -20,6 +24,7 @@ import javax.swing.JScrollPane;
 import org.protege.editor.core.ui.list.MList;
 import org.protege.editor.core.ui.list.MListButton;
 import org.protege.editor.core.ui.util.ComponentFactory;
+import org.protege.editor.owl.ui.OWLIcons;
 
 import com.expertsystem.lab.lov.ResultsListItem;
 
@@ -60,12 +65,12 @@ public class LOVResultsPanel extends JPanel {
 	public void init(){
 		this.removeAll();
 		text = new JLabel();		
-		text.setFont(new Font(text.getFont().getName(), Font.PLAIN, 10));
-		text.setText("<html> <img src='http://lov.okfn.org/img/LOV.png' height='47' width='47' style='float:left;margin:0 5px 0 0;'/> "
+		text.setFont(new Font(text.getFont().getName(), Font.PLAIN, 11));
+		text.setText("<html> <img src='http://lov.okfn.org/img/LOV.png' height='50' width='50' style='float:left;margin:0 5px 0 0;'/> "
 				+ "LOV stands for Linked Open Vocabularies. <br> "
-				+ "This name is derived from LOD, standing for Linked Open Data. <br>"
+				+ "This name is derived from LOD, standing for Linked Open Data. "
 				+ "Let's assume that the reader is somehow familiar with the latter concept, <br>"
-				+ "otherwise a visit to http://linkeddata.org/ or http://www.w3.org/2013/data/ <br>"
+				+ "otherwise a visit to http://linkeddata.org/ or http://www.w3.org/2013/data/ "
 				+ "will help to figure it before further reading.</html>");
 		text.setOpaque(true);
 		text.setBackground(Color.WHITE);
@@ -146,7 +151,7 @@ public class LOVResultsPanel extends JPanel {
 
 			ResultsListItem item = (ResultsListItem) value;
 			String text = "<html><div style='font-size: 9px;'><b>" + item.getPrefix() + ":" +item.getName() 
-					+ "</b> (" + item.getPrefix() + ")&nbsp;&nbsp;&nbsp;&nbsp;" + item.getConfidence() + "</div> <br>";
+					+ "</b> (" + item.getPrefix() + ")&nbsp;&nbsp;&nbsp;&nbsp; Score:" + item.getConfidence() + "</div> <br>";
 
 			if(!item.getNum_ocurrences().equals("0") && !item.getNum_datasets().equals("0")){
 				text += item.getNum_ocurrences() + " occurrences in "+ item.getNum_datasets() + " LOD datasets <br>";
@@ -161,7 +166,7 @@ public class LOVResultsPanel extends JPanel {
 			if(!item.getLabel().equals("")){
 				text += "<font color='green'> rdfs:label </font>" + item.getLabel();
 			}
-			
+
 			if(!item.getUsageNote().equals("")){
 				text += "<font color='green'> http://purl.org/vocab/vann/usageNote </font>" + item.getUsageNote();
 			}
@@ -170,7 +175,7 @@ public class LOVResultsPanel extends JPanel {
 			text += "</html>";
 
 			label.setText(text);
-			label.setFont(new Font(label.getFont().getName(), Font.PLAIN, 10));
+			label.setFont(new Font(label.getFont().getName(), Font.PLAIN, 11));
 			r.add(label, BorderLayout.WEST);
 
 			return r;			
@@ -183,53 +188,116 @@ public class LOVResultsPanel extends JPanel {
 			super("Add Sub-entity", Color.DARK_GRAY.darker(), subentity_listener);
 		}
 
+		@Override
+		public Color getBackground() {
+			return new Color(220, 220, 220);
+		}
+
 		public void paintButtonContent(Graphics2D g) {
-			int w = getBounds().width;
-			int h = getBounds().height;
+			//int w = getBounds().width;
+			//int h = getBounds().height;
 			int x = getBounds().x;
 			int y = getBounds().y;
-			g.drawOval(x + 3, y + 3, 6, 6);
-			g.drawLine(x + 8, y + 8, x + w - 5, y + h - 5);
+			//g.drawOval(x + 3, y + 3, 6, 6);
+			//g.drawLine(x + 8, y + 8, x + w - 5, y + h - 5);
+
+			String fileName = "class.add.sub.png";
+
+			if (fileName != null) {
+				ClassLoader loader = OWLIcons.class.getClassLoader();
+				URL url = loader.getResource(fileName);
+				if (url == null && !fileName.startsWith("/")) {
+					url = loader.getResource("icons/" + fileName);
+				}
+				try {
+					Image img = ImageIO.read(url);					
+					g.drawImage(img, x + 2, y + 2, null);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}	        
 		}
 	}
 
 	private class MListAddButton extends MListButton {
 
 		protected MListAddButton(ActionListener actionListener) {
-			super("Add Entity and Equivalent Axiom", Color.GREEN.darker(), actionListener);
+			super("Add Entity and Equivalent Axiom", Color.DARK_GRAY.darker(), actionListener);
+		}
+
+		@Override
+		public Color getBackground() {
+			return new Color(220, 220, 220);
 		}
 
 		public void paintButtonContent(Graphics2D g) {
-			int size = getBounds().height;
-			int thickness = (Math.round(size / 8.0f) / 2) * 2;
+			//int size = getBounds().height;
+			//int thickness = (Math.round(size / 8.0f) / 2) * 2;
 
 			int x = getBounds().x;
 			int y = getBounds().y;
 
-			int insetX = size / 4;
+			/*int insetX = size / 4;
 			int insetY = size / 4;
 			int insetHeight = size / 2;
 			int insetWidth = size / 2;
 			g.fillRect(x + size / 2  - thickness / 2, y + insetY, thickness, insetHeight);
-			g.fillRect(x + insetX, y + size / 2 - thickness / 2, insetWidth, thickness);
-		}
+			g.fillRect(x + insetX, y + size / 2 - thickness / 2, insetWidth, thickness);*/
+
+			String fileName = "class.add.sib.png";
+
+			if (fileName != null) {
+				ClassLoader loader = OWLIcons.class.getClassLoader();
+				URL url = loader.getResource(fileName);
+				if (url == null && !fileName.startsWith("/")) {
+					url = loader.getResource("icons/" + fileName);
+				}
+				try {
+					Image img = ImageIO.read(url);					
+					g.drawImage(img, x + 2, y + 2, null);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}	 
+		}		
 	}
-	
+
 	private class MListEditButton extends MListButton {
 
-	    protected MListEditButton(ActionListener actionListener) {
-	        super("Reuse Directly", new Color(20, 80, 210), actionListener);
-	    }
+		protected MListEditButton(ActionListener actionListener) {
+			super("Reuse Directly", Color.DARK_GRAY.darker(), actionListener);	       
+		}
 
-	    public void paintButtonContent(Graphics2D g) {
-	        Rectangle bounds = getBounds();
-	        int x = bounds.x;
-	        int y = bounds.y;
-	        int size = bounds.width;
-	        int quarterSize = (Math.round(bounds.width / 4.0f) / 2) * 2;
-	        g.fillOval(x + size / 2 - quarterSize, y + size / 2 - quarterSize, 2 * quarterSize, 2 * quarterSize);
-	        g.setColor(getBackground());
-	        g.fillOval(x + size / 2 - quarterSize / 2, y + size / 2 - quarterSize / 2, quarterSize, quarterSize);
-	    }
+		@Override
+		public Color getBackground() {
+			return new Color(220, 220, 220);
+		}
+
+		public void paintButtonContent(Graphics2D g) {
+			Rectangle bounds = getBounds();
+			int x = bounds.x;
+			int y = bounds.y;
+			int size = bounds.width;
+			int quarterSize = (Math.round(bounds.width / 4.0f) / 2) * 2;
+			g.fillOval(x + size / 2 - quarterSize, y + size / 2 - quarterSize, 2 * quarterSize, 2 * quarterSize);
+			g.setColor(Color.YELLOW.darker());
+			g.fillOval(x + size / 2 - quarterSize / 2, y + size / 2 - quarterSize / 2, quarterSize, quarterSize);
+			
+			/*String fileName = "Classes.gif";
+
+			if (fileName != null) {
+				ClassLoader loader = OWLIcons.class.getClassLoader();
+				URL url = loader.getResource(fileName);
+				if (url == null && !fileName.startsWith("/")) {
+					url = loader.getResource("icons/" + fileName);
+				}
+				try {
+					Image img = ImageIO.read(url);					
+					g.drawImage(img, x + 2, y + 2, null);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}*/	
+		}
 	}
 }

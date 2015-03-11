@@ -73,7 +73,7 @@ public class LOView extends AbstractOWLViewComponent {
 			}			
 		}		
 	};
-	
+
 	public void updateListLOV() {
 		String type_lov = lsp.getType();
 		if(type_lov.equals("objectproperty")){
@@ -94,7 +94,12 @@ public class LOView extends AbstractOWLViewComponent {
 			status.setText("Error Status: Connection problem API LOV - Access down");			
 		}
 		else{
-			status.setText("Total Results (" + lsp.getLocal_name_value() + "): " + connector.getTotal_results());	
+			int results_shown = 10;
+			if(connector.getTotal_results() < 10){
+				results_shown = connector.getTotal_results();
+			}
+			status.setText("Total Results (" + lsp.getLocal_name_value() + "): " + results_shown + " of " 
+					+ connector.getTotal_results());	
 			lrp.updateLOVResults(r);
 			lrp.updateUI();
 		}			
@@ -112,7 +117,12 @@ public class LOView extends AbstractOWLViewComponent {
 		}
 
 		private void handleAdd(ResultsListItem item) {
-			status.setText("Total Results (" + lsp.getLocal_name_value() + "): " + connector.getTotal_results());
+			int results_shown = 10;
+			if(connector.getTotal_results() < 10){
+				results_shown = connector.getTotal_results();
+			}
+			status.setText("Total Results (" + lsp.getLocal_name_value() + "): " + results_shown + " of " 
+					+ connector.getTotal_results());			
 			status.setText(status.getText() + " | Entity selected " + item.getPrefix() + ":" + item.getName());	
 
 			OWLEntity selectedEntity = getOWLWorkspace().getOWLSelectionModel().getSelectedEntity();
