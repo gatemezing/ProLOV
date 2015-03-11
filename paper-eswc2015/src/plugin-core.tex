@@ -5,10 +5,11 @@ Currently, Prot{\'e}g{\'e}LOV provides the following five functionalities:
 \begin{enumerate}
 \vspace{-1mm}\item \textbf{Search for a particular term (class or property) in LOV repository}. 
 The user selects a particular term from the \emph{Class}, \emph{Object property} or \emph{Data property} navigator. 
-Next, the user switches to the Linked Open Vocabularies View and performs a search on the LOV repository.
-
-\vspace{-1mm}\item \textbf{Browse the list of terms, from LOV repository, which matches the search criteria}. The system takes as input the selected term, and calls the LOV REST API to get the LOV terms that match the criteria.
+Next, the user switches to the \emph{Linked Open Vocabularies View} and performs a search on the LOV repository. The system takes as input the selected term, and calls the LOV REST API to get the LOV terms that match the criteria.
 The plugin provides the following information (if it is available) for each term (1) URI, (2) score, (3) label, (4) local name, and (5) usage note.
+
+%\vspace{-1mm}\item \textbf{Browse the list of terms, from LOV repository, which matches the search criteria}. The system takes as input the selected term, and calls the LOV REST API to get the LOV terms that match the criteria.
+%The plugin provides the following information (if it is available) for each term (1) URI, (2) score, (3) label, (4) local name, and (5) usage note.
 
 \vspace{-1mm}\item \textbf{Reuse directly a particular term from LOV repository}
 The user selects the \emph{reuse directly} option. Next, the system replaces the selected term from the \emph{Class}, \emph{Object property} or \emph{Data property} navigator, and replaces by the selected term from LOV.
@@ -16,8 +17,8 @@ The user selects the \emph{reuse directly} option. Next, the system replaces the
 \vspace{-1mm}\item \textbf{Add the particular term and define the {\tt owl:equivalentClass} or {\tt owl:equivalentProperty} axiom}.
 The user selects the \emph{add entity and equivalent axiom} option. Next, the system includes the new term on the local ontology, and defines {\tt owl:equivalentClass} or {\tt owl:equivalentProperty} axiom to relate both terms.
 
-\vspace{-1mm}\item \textbf{Add the particular term and define the {\tt rdf:subClassOf} or {\tt rdfs:subPropertyOf} axiom}
-The user selects the \emph{add entity and sub-entity axiom} option. Next, the system includes the new term on the local ontology, and defines {\tt rdfs:subClassOf} or {\tt rdfs:subPropertyOf} axiom to related both terms.
+\vspace{-1mm}\item \textbf{Add the particular term and define the {\tt rdf:subClassOf} or {\tt rdfs:sub-}\\
+{\tt PropertyOf} axiom}. The user selects the \emph{add entity and sub-entity axiom} option. Next, the system includes the new term on the local ontology, and defines {\tt rdfs:subClassOf} or {\tt rdfs:subPropertyOf} axiom to related both terms.
 \end{enumerate}
 
 Figure \ref{fig:LOVoptions} depicts the three main actions the user can perform. % on the selected LOV term. 
