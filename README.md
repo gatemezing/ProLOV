@@ -27,13 +27,10 @@ Evaluation survey
 ==================
    - First version for the beta version, survey  at http://tinyurl.com/surveyProtegeLOV 
 
+How to use
+============
+  - See the demo video at https://www.youtube.com/watch?v=UgA17N5FNzA. 
   
-  
-Skype Calls
-==========
-  - [ ] 12/1/2015: Call to see the evolution of the plugin (and every Wednesday until 13/03/2015
-  - [ ] 20/01/2015: another call for looking at inserting a small plugin
-  - [ ] Every week until the submission at ESWC 2015 
   
 
 Target conferences
