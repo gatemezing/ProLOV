@@ -1,6 +1,8 @@
 The intended purpose of the LOV \cite{vandenbusschelov} is to help users to find and reuse terms of vocabularies in Linked Open Data. For achieving that purpose, the LOV gives access to vocabularies metadata and terms using programmatic access with APIs.  
 LOV\footnote{\url{http://lov.okfn.org/dataset/lov/}} catalogue is a hub of curated vocabularies used in the Linked Open Data Cloud, as well as other vocabularies suggested by users for their reuse. 
 Some of the three main features of the LOV are for: (1) searching ontologies according to their scope, (2) assessing ontologies by providing a score for each term retrieved by a keyword search and (3) interconnecting ontologies using VOAF vocabulary\footnote{\url{http://lov.okfn.org/vocab/voaf}}.
+The search function uses an algorithm based on the term
+popularity in LOD and in the LOV ecosystem. The matched resource set for each term should be the value of the a) {\tt rdfs:label} b) {\tt rdfs:comment}, or c) {\tt rdfs:description} property.
 
 %\begin{enumerate}
 %\item Searching ontologies: It is the main LOV's feature is the search of vocabulary terms. These vocabularies are categorized within LOV according to the domain they address. In this way, LOV contributes to ontology search by means of (a) keyword search and (b) domain browsing.
