@@ -1,0 +1,315 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%   Information Content based Ranking Metric for Linked Open Vocabularies   %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass{sig-alternate}
+
+\usepackage{amssymb}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{sidecap}
+\usepackage[pdftex]{pstricks}
+\usepackage{tabularx}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage[cyr]{aeguill}
+\usepackage{pdflscape}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\newtheorem{deflda}{Condition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  Beginning of document  %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+% --- ACM copyright metadata here ---
+\conferenceinfo{SEM}{14, September 04 - 05 2014, Leipzig, AA, Germany}
+\CopyrightYear{2014}
+\crdata{978-1-4503-2927-9/14/09.}
+
+\title{Information Content based Ranking Metric\\for Linked Open Vocabularies}
+
+\numberofauthors{2}
+\author{
+% 1st. author
+\alignauthor Ghislain Auguste Atemezing\\
+       \affaddr{EURECOM}\\
+       \affaddr{Campus SophiaTech, France}\\
+       \email{atemezin@eurecom.fr}
+% 2nd. author
+\and
+\alignauthor Rapha\"{e}l Troncy\\
+       \affaddr{EURECOM}\\
+       \affaddr{Campus SophiaTech, France}\\
+       \email{raphael.troncy@eurecom.fr}
+}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%%%
+%%%  Abstract  %%%
+%%%%%%%%%%%%%%%%%%
+
+\begin{abstract}
+It is widely accepted that by controlling metadata, it is easier to publish high quality data on the web. Metadata, in the context of Linked Data, refers to vocabularies and ontologies used for describing data. With more and more data published on the web, the need for reusing controlled taxonomies and vocabularies is becoming more and more a necessity. Catalogues of vocabularies are generally a starting point to search for vocabularies based on search terms. Some recent studies recommend that it is better to reuse terms from ``popular'' vocabularies~\cite{krzysztof14}. However, there is not yet an agreement on what makes a popular vocabulary since it depends on diverse criteria such as the number of properties, the number of datasets using part or the whole vocabulary, etc. In this paper, we propose a method for ranking vocabularies based on an information content metric which combines three features: (i) the datasets using the vocabulary, (ii) the outlinks from the vocabulary and (iii) the inlinks to the vocabulary. We applied this method to $366$ vocabularies described in the LOV catalogue. The results are then compared with other catalogues which provide alternative rankings.
+\end{abstract}
+
+% Categories for the papers.
+\category{H.4}{Information Systems Applications}{Miscellaneous}
+\category{H.3.5}{Online Information Services}{Data sharing}[Web-based services]
+
+\terms{Ranking, Linked Data, Vocabularies}
+
+\keywords{Information Content, Linked Open Vocabularies, reusing vocabularies, ranking metric.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  1. Introduction  %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Introduction}
+\label{sec:introduction}
+The linked data principles have gained significant momentum over the last few years as a best practice for sharing and publishing structured data on the Semantic Web~\cite{Bizer2009}. Before being published, data is modeled and ontologies or vocabularies are one of the key elements of a dataset. Vocabularies are the artefact that bring semantics to raw data. One of the major barriers to the deployment of linked data is the difficulty for data publishers to determine which vocabularies should be used since developing new vocabularies has a cost. Catalogues of ontologies are therefore a useful resource for searching terms (classes and properties) defined in those vocabularies. The Linked Open Vocabulary (LOV) initiative~\cite{scharffe_2012} is playing a significant role in providing such services to users who can search within curated vocabularies, fostering ontologies reuse. LOV focuses only on vocabularies submitted by users, which are then reviewed and validated by curators. In addition, LOV computes dependencies between vocabularies, keeps track of different versions of them in order to enable their temporal evolution.
+
+To the best of our knowledge, recommending vocabularies to reuse are limited to ``popular'' or ``well-known'' ones. This paper proposes a metric combining different features such as how vocabularies are interlinked, or how they are used in real world datasets. This contribution originates also in the desire to bring the traditional concept of Information Content (IC) into the field of the semantic web applied to vocabularies. Many catalogs of ontologies already provide some ranking metrics based on some features. However, we are interested in applying the principles of IC on vocabularies to investigate if such techniques can give more insights in ontology ranking and ontology usage (e.g in visualization applications).
+
+The paper is organized as follows: Section~\ref{sec:theory} defines the theory of Information Content, and the features used for applying Partition Information Content to vocabularies. We present our experiments on the LOV catalogue in the Section~\ref{sec:experiments}. We discuss how this ranking metric can be used for vocabulary design and maintenance in Section~\ref{sec:application}. We compare our results with other rankings for vocabularies in Section~\ref{sec:related} before concluding and outlining future work (Section~\ref{sec:conclusion}).
+\vspace{-0.2cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  2. Information Content Metrics  %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Information Content Metrics}
+\label{sec:theory}
+Based on probability theory, Information Content (IC) is computed as a measure of generated amount of surprise~\cite{ross02}. More common terms in a given corpus with higher chance of occurrence cause less surprise and accordingly carry less information, whereas infrequent ones are more informative. We reuse the notion of informativeness as the value of information associated with a given entity, where Information Content has a negative relation with its probability. The concept of Information Content can be used to rank each entity, term, or alphabet in the corpus. We apply the Partitioned Information Content to measure the informativeness of Linked Open Vocabularies as a semantic network of resources connected together using different range of relations, as described in~\cite{Meymandpour13}. Partitioned Information Content (PIC) is derived from the IC value using some weights. We empirically set those weights according to three features:
+\begin{itemize}
+ \item (i) datasets using the vocabulary ($weight = 2$);
+ \item (ii) \textit{outlinks} from a vocabulary, i.e. whether a vocabulary reused other vocabularies ($weight = 1$);
+ \item (iii) \textit{inlinks} to a vocabulary, i.e. whether other vocabularies are reusing this vocabulary ($weight = 3$).
+\end{itemize}
+
+\subsection{Information Content in Linked Open Vocabularies}
+This experiment aims at bringing the concept of informativeness in the field of terms semantically related as it is the case within semantic web ontologies. The ranking obtained can give additional information based on the Information Content theory to help reusing terms and detecting the ones that are less popular. This can then be used by applications consuming datasets described with these vocabularies. The equation (1) gives the formula for computing the IC value of a term (class or property):
+\begin{equation}
+ IC(t) = -\log_2(\frac{\varphi(t)}{N}) ,
+\end{equation}
+where $N$ is set to be the maximum value corresponding to the term occurrence in the LOV aggregator (as of June 2014, this value is $3958$, and it corresponds to the popularity of the \texttt{skos:prefLabel} property); and $\varphi(t)$ is the occurrence of the term (but not its popularity).
+
+For computing $\varphi(t)$, we use two types of SPARQL queries depending on whether the term is a class (Listing~\ref{list:classCount}) or a property (Listing~\ref{list:propCount} considers \texttt{owl:ObjectProperty}, \texttt{owl:Data\-typeProperty} and \texttt{rdfs:Property}). Note that we do not yet take into account the \texttt{owl:equivalentClass} and \texttt{owl:equi\-valentProperty} axioms that may appear in some vocabularies. We leave this as a future work.
+
+\begin{lstlisting}[float=htb,caption={SPARQL query for computing the occurrence of a class },label=list:classCount]
+ SELECT (count(?uri1) as ?occ)
+ WHERE {
+   ?uri1  ?p %%classURI . }
+\end{lstlisting}
+
+\begin{lstlisting}[float=htb,caption={SPARQL query for computing the occurrence of a property },label=list:propCount]
+ SELECT (count(?uri1) as ?occ)
+ WHERE {
+   ?uri1 +objectURI+ ?uri2.
+   FILTER  (?uri1 != ?uri2) }
+\end{lstlisting}
+
+\subsection{Ranking Vocabularies using Information Content}
+For computing the PIC value, we use the following formula:
+\begin{equation}
+ PIC(f) =  w_{f} \times \sum_{i=1}^{n}IC(t_{i})  ,
+\end{equation}
+where $w_{f}$ is the weight related to vocabulary $f$.
+
+We consider very important that a vocabulary is being reused by other vocabularies and implemented within real world datasets. For example, the \texttt{foaf} ontology is weighted $6$ because it reuses vocabularies (1), it has been used in some datasets (2) and it is being reused by other vocabularies (3). The \texttt{dul}\footnote{\url{http://www.ontologydesignpatterns.org/ont/dul/DUL.owl}} vocabulary is weighted $3$ because it doesn't reuse any vocabulary but it is instead used by several other vocabularies.
+\vspace{-0.2cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  3. Experiments on Vocabularies  %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Experiments on Vocabularies}
+\label{sec:experiments}
+We use the LOV catalogue, and particularly the LOV aggregator\footnote{\url{http://lov.okfn.org/endpoint/lov_aggregator}} to look at the terms (classes and properties) to compute their Information Content (IC). LOV defines the \textit{LOV Distribution} as the number of vocabularies in LOV that refer to a particular element and the \textit{LOV popularity} as the number of other vocabulary elements that refers to a particular one. Based on the concept of Partitioned Information Content, we implement our ranking measure according to the algorithm~\ref{rankingvocab}. We take the subset of classes and/or properties with LOV popularity and LOV distribution greater than one. The initial set of vocabularies in LOV is $366$. After filtering the candidate terms, we came out with a set of $161$ vocabularies ($44\%$ or $161$ vocabularies) for computing their ranking.
+
+The Table~\ref{tab:top15} gives the Top 15-ranking of the vocabularies according to the informativeness of the classes and properties used within the LOV ecosystem. As the function is proportional to the number of terms, we use a threshold of $22$ terms in the vocabularies. For example, the PIC value of \texttt{dcterms} is higher than \texttt{foaf}'s because the former uses $53$ terms (39 properties and 14 classes), while the latter only $35$ terms (9 classes and 26 properties), although they both have the same weight value.
+
+The Table~\ref{tab:top20} shows the Top 20 namespaces of vocabularies according to the informativeness of the classes and properties used within the LOV ecosystem, along with their Information Content Value.
+\begin{table}[htbp]
+\centering{
+\begin{tabular}{lrcc}
+\specialrule{1pt}{1pt}{1pt}
+ \textbf{Rank}	& \textbf{Prefix} 	& \textbf{PIC score} 		 \\ \specialrule{1pt}{1pt}{1pt}
+1 	& \textsf{dcterms}			& 1724.844	 		 \\
+2	& \textsf{schema}		    & 1588.700				 \\
+3 	& \textsf{gr} 				& 1261.101		\\
+4	& \textsf{foaf}  			& 1033.197 			\\
+5	& \textsf{bibo}   			& 876.205  			\\
+6	& \textsf{time}   			& 816.2020  			\\
+7	& \textsf{skos}   			& 805.287  			\\
+8	& \textsf{dul}   			& 797.328  			\\
+9	& \textsf{ptop}   			& 773.167  			\\
+10	& \textsf{rdafrbr}   		& 640.834 			\\
+11	& \textsf{vaem}   		    & 630.621 			\\
+12	& \textsf{ma-ont}   		& 508,694 			\\
+13	& \textsf{prov}   		    & 497.524 			\\
+14	& \textsf{swrc}   		    & 437.394 			\\
+15	& \textsf{dce}   			& 428.618  			\\ \specialrule{1pt}{1pt}{1pt}
+\end{tabular}
+\caption{Top 15 vocabularies according to their PIC. All the prefixes used for the vocabularies are the ones used by LOV}
+\label{tab:top15}
+}
+\end{table}
+
+\begin{table}[htbp]
+\centering{
+\begin{tabular}{llr}
+\specialrule{1pt}{1pt}{1pt}
+ \textbf{Rank}	& \textbf{vocab term} & \textbf{IC value} 			 \\ \specialrule{1pt}{1pt}{1pt}
+1 	& \textsf{skos:example}	& 7.7806		       	 		 \\
+2	& \textsf{dce:contributor} & 4.674						 \\
+3 	& \textsf{skos:scopeNote} & 4.365					\\
+4	& \textsf{dcterms:source} & 4.299			 			\\
+5	& \textsf{mads:code}   	& 3.922		  			\\
+6	& \textsf{mads:authoritativeLabel}  & 3.922 			\\
+7	& \textsf{vs:userdocs} 	& 3.847		 			\\
+8	& \textsf{dce:title}  & 3.79			  			\\
+9	& \textsf{skos:hasTopConcept} & 3.4547 		 		\\
+10	& \textsf{dce:description} & 2.758 		 		\\
+11	& \textsf{dcterms:issued} & 2.553	 		\\
+12	& \textsf{dce:creator}	& 2.518 		\\
+13	& \textsf{skos:inScheme}	& 2.202 		\\
+14	& \textsf{skos:notation}	& 1.924	 		\\
+15	& \textsf{dcterms:description} & 1.646		 		\\
+16	& \textsf{coll:List}		& 0.761		\\
+17	& \textsf{vs:term\_status}	& 0.735	 		\\
+18	& \textsf{skos:definition}	& 0.43	 		\\
+19	& \textsf{skos:prefLabel} & 0.009	 		\\
+20	& \textsf{foaf:Person} & 0		  			\\ \specialrule{1pt}{1pt}{1pt}
+\end{tabular}
+\caption{Ranking of Top 20 terms (classes and properties) according to their IC value}
+\label{tab:top20}
+}
+\end{table}
+
+\begin{algorithm}[htbp]
+\caption{Ranking vocabularies algorithm} \label{rankingvocab}
+\begin{algorithmic}[1]
+  \footnotesize{  \REQUIRE Dump of $lov aggregator$ file
+    \STATE Upload in a triple store for querying
+    \STATE Select subset of candidate vocabs $ LOV aggregator endpoint $
+    \FOR { $term \in lovaggregator$ }
+    	\IF {($LOV distribution \geq 1$ )\AND ($LOV Popularity \geq 1$)}
+     		\STATE $candidateterms \leftarrow$ append $term$
+       \ENDIF
+    \ENDFOR
+    \FOR { each $term \in candidateterms$}
+	\STATE GROUP BY vocabulary namespace
+	\STATE COMPUTE weight for each vocabulary
+    \ENDFOR
+    \STATE INITIALIZE $PICvector$ AS a vector
+     \FOR { each $term \in candidateterms$}
+      \WHILE { $term \in vocabularySpace $}
+        \STATE $ICterm \leftarrow$ function IC(term, vocabPrefix)
+	\STATE $ICvocab \leftarrow$ $\sum ICterm $
+       \ENDWHILE
+        \STATE  $PICvocab \leftarrow$ $weight(vocab) \times $ICvocab
+        \STATE $PICvector \leftarrow$ append (PICvocab)
+        \STATE ORDER PICvector
+    \ENDFOR
+    \RETURN PICvector
+  }
+\end{algorithmic}
+\end{algorithm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  4. Application of Information Content on Vocabularies  %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Application of Information Content on Vocabularies}
+\label{sec:application}
+We foresee various applications using the ranking method based on the Information Content metric while designing semantic web applications, vocabulary life-cycle management or novel recommendation services. We make the following recommendations when using the PIC ranking method on vocabularies:
+\begin{itemize}
+ \item Vocabularies on the Top PIC-ranking can be used in visualization applications, i.e. to be displayed to the user as much as possible.
+ \item Terms with lower IC can be used in facetted browsing, and they seem appropriate for generating \texttt{sameAs} links during the interconnection and enrichment process. They might also be used for promoting the reuse of terms in vocabularies in general.
+ \item The PIC-ranking could help the ontology designers to monitor and to assess the usage of some terms and lead to update the ontology accordingly. For example, it can be useful in extending the use of the properties such as \texttt{vs:term\_status} or \texttt{owl:deprecated}.
+ \item Such a ranking can be used to rank organizations or publishers of vocabularies in a time period (e.g. annual) as a way to encourage good qualities vocabularies and/or datasets on the cloud.
+\end{itemize}
+The use of the information content on LOV vocabularies can be applied in the datasets interlinking task and visualization applications workflow. For interlinking datasets, this method can help detecting properties with a lower PIC which will be a candidate for the interlinking tool. The PIC score can further be used to track the vocabularies terms status (i.e. \texttt{vs:term\_status} ) or \texttt{owl:deprecated} properties by dataset maintainers. From the list of namespaces having deprecated terms (Table~\ref{tab:deprecated}), we observe some correlations with the PIC rank for the vocabularies \texttt{dcat (8), vcard (36), gr (6), wl (2), pav (1)} and \texttt{bibo (1)}\footnote{As of June 2014, there are 60 terms deprecated in LOV with the query \url{http://bit.ly/1aqcDf3}}. More precisely, the presence of \texttt{gr} and \texttt{bibo} provides evidence of such a correlation, while the presence of \texttt{dcat} and \texttt{card} can be explained by the fact that those two vocabularies are in a review process at W3C and subject to re-modeling respectively. Table~\ref{tab:deprecated} gives an overview of some namespaces with their deprecated terms.
+\vspace{-0.2cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  5. Related Work and Discussion  %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Related Work and Discussion}
+\label{sec:related}
+In this section, we look at three other catalogues providing rankings for vocabularies: vocab.cc, LODStats and prefix.cc. vocab.cc\footnote{\url{http://vocab.cc/v/tco}} does not provide a ranking for vocabularies but rather proposes a rank for classes and properties. The proposed ranking presented in Table~\ref{tab:compareRanking} is taken from the ranking of classes assuming the namespace is used only once per class.
+
+\begin{table}[!htbp]
+\centering{
+\begin{tabular}{lcc}
+\specialrule{1pt}{1pt}{1pt}
+ \textbf{prefix}	& \#DeprecatedTerms 	& dcterms:modified		 \\ \specialrule{1pt}{1pt}{1pt}
+\textsf{vcard} 	& 36	 & 2013-09-25  \\
+\textsf{dcat} 	& 8 & 	2013-09-20  \\
+\textsf{gr}	 & 6 & 	2011-10-01  \\ 		
+\textsf{wl}	 & 2 & 	2013-05-30  \\ 	
+\textsf{pav}	 & 1 & 	2013-08-30  \\ 	
+\textsf{bibo	} & 1 & 	2009-11-04 	\\ \specialrule{1pt}{1pt}{1pt}
+\end{tabular}
+\caption{Sample of vocabularies with terms deprecated in LOV}
+\label{tab:deprecated}
+}
+\end{table}
+
+\begin{table}[htbp]
+\centering{
+\begin{tabular}{lcccc}
+\specialrule{1pt}{1pt}{1pt}
+ \textbf{Rank}	& \textbf{LOV-PIC } 	& \textbf{prefix.cc} 	& \textbf{vocab.cc} & \textbf{lodstats}	  \\ \specialrule{1pt}{1pt}{1pt}
+1 	& dcterms			 & yago	 	& intervals	  & 	rdf		\\
+2	& schema 		 & rdf		& foaf	 & rdfs			\\
+3 	& gr 				& foaf		& time      	& owl			\\
+4	& foaf  			& dbp 		& qb  	& dcterms			\\
+5	& bibo   			& dce  		& scovo	& skos			\\
+6	& time   			& owl 		& freebase  & foaf		\\
+7	& skos   			& rdfs  		& mo 	 & dce		\\
+8	& dul   			& dbo  		& owl	 & void			\\
+9	& ptop   			& rss 		& metalex	 & geo			\\
+10	& rdafrbr   		& skos 		& doap	 & aktors		\\
+11	& vaem   		        & gldp 		& prov	& ro			\\
+12	& ma-ont   		& geo 		& void	& obo			\\
+13	& prov   		        & sc 			& frbr     	& app			\\
+14	& swrc   		        & fb 			& skos       & repo 			\\
+15	& dce   			& gn  		& dcterms  & time 	\\ \specialrule{1pt}{1pt}{1pt}
+\end{tabular}
+\caption{Comparing ranking position when using PIC in LOV with respect to prefix.cc and vocab.cc}
+\label{tab:compareRanking}
+}
+\end{table}
+
+The LODStats ranking is focused on covering the number of datasets reused in the linked open data cloud~\cite{demter:2012}, which is partially taken into account in our approach. The evidence of that is the first three vocabularies used (\texttt{RDF, RDFS, OWL}) which are considered as the meta model for designing vocabularies. Those vocabularies are not included into the LOV catalogue and they do not appear in our ranking. The relative stable position of \texttt{foaf} in the four columns of the table suggests that there are equal popular terms. In addition, two other vocabularies have ``relative'' similar ranking using PIC and LODStats: \texttt{skos} and \texttt{dcterms}. Regardless the metric used, a short list of the ``most popular vocabularies'' based on their presence in the Top-15 of the four catalogues is: \texttt{foaf, skos} followed by \texttt{dcterms, time, dce, prov}.
+
+Closer to our work, Schaible \emph{et al.} reported on an empirical study involving 75 linked data experts and practitioners assessing reuse strategies based on various ranking decisions~\cite{Schaible:ESWC14}. The goal is to find objective criteria for choosing which vocabularies to reuse and how many can be combined. LODStats and LOV are used to obtain the number of datasets using a specific vocabulary while \textit{vocab.cc} is used for getting the number of occurrence of a vocabulary term. We propose a different metric to rank existing vocabularies that can be furthermore added as a new feature in such a study. One drawback in the model is to use the same weight for two vocabularies with different number of datasets reused. This could be address in the future by using a ``function based'' weighting for datasets reused (e.g. inverse logarithm) for computing the PIC score.
+\vspace{-0.2cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  6. Conclusion and Perspective  %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Conclusion and Perspective}
+\label{sec:conclusion}
+We have presented a different perspective of ranking vocabularies using the principles of Information Content. By applying this concept to Linked Open Vocabularies, we tried to use features that we consider ``relevant'' to be taken into account when comparing vocabularies (e.g: datasets reused, external vocabularies). We compare with other rankings that are mostly based on the ``popularity'' of vocabularies. This work can path the way for assessing vocabularies with applications in a more systemic approach for recommending classes/properties in ontology management, or in visualization applications to propose the most \textit{``oh yeah?''} suitable property to be visualized for RDF entities when there is large a large number of properties. As future work, we aim to take into account the equivalence axioms (between classes and properties) when computing the Information Content, and more generally, all sort of semantic relationships between terms. Also, we plan to compare our ranking model with other ranking approaches such as graph-based ones (e.g. pagerank). Another future direction work is to investigate the dependency ranking between vocabularies, by focusing on a specific type of ``inlinks'' (i.e. extensions, generalization) and study how they affect the PIC values.
+\vspace{-0.2cm}
+
+\section*{Acknowledgment}
+\label{sec:ack}
+This work has been partially supported by the French National Research Agency (ANR) within the Datalift Project, under grant number ANR-10-CORD-009.
+
+\bibliographystyle{abbrv}
+\bibliography{IC4LOV}
+\balancecolumns
+
+\end{document}

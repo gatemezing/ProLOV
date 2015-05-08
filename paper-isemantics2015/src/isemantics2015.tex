@@ -1,0 +1,146 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%   %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass{sig-alternate}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\setcounter{tocdepth}{3}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{url}
+\usepackage{listings}
+\usepackage{subfigure}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+
+
+%\newcommand{\keywords}[1]{\par\addvspace\baselineskip
+%\noindent\keywordname\enspace\ignorespaces#1}
+
+% todo macro
+\usepackage{color}
+\newtheorem{deflda}{Axiom}
+\newcommand{\todo}[1]{\noindent\textcolor{red}{{\bf \{TODO}: #1{\bf \}}}}
+\newcommand{\neon}{NeOn }
+\newcommand{\protege}{Prot{\'e}g{\'e} }
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  Beginning of document  %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+% first the title is needed
+% --- ACM copyright metadata here ---
+%\conferenceinfo{SEM}{14, September 04 - 05 2014, Leipzig, AA, Germany}
+%\CopyrightYear{2015}
+%\crdata{978-1-4503-2927-9/14/09.}
+
+\title{How to access and reuse ontologies in real-world scenarios }
+
+\numberofauthors{3}
+\author{
+% 1st. author
+\alignauthor Ghislain Auguste Atemezing\\
+       \affaddr{MONDECA}\\
+       \affaddr{35 boulevard Strasbourg, Paris, France}\\
+       \email{\small{ghislain.atemezing@mondeca.com}}
+% 2nd. author
+\alignauthor Boris Villaz{\'o}n-Terrazas\\
+       \affaddr{Expert System Iberia}\\
+       \affaddr{Campo de las Naciones, Madrid, Spain.}\\
+       \email{\small{bvillazon@expertsystem.com}}       
+% 3rd author
+  \alignauthor Nuria Garc{\'i}a-Santa\\
+       \affaddr{Expert System Iberia}\\
+       \affaddr{Campo de las Naciones, Madrid, Spain.}\\
+       \email{\small{ngarcia@expertsystem.com}}
+}
+
+\maketitle
+
+
+%%%%%%%%%%%%%%%%%%
+%%%  Abstract  %%%
+%%%%%%%%%%%%%%%%%%
+
+\begin{abstract}
+Developing ontologies, by reusing already available and well-known ontologies, is commonly acknowledge to play a crucial role to facilitate inclusion and expansion of the Web of Data. Some recommendations exist to guide ontologists in ontology engineering, but they do not provide guidelines on how to reuse vocabularies at low fine grained, i.e., reusing specific classes and properties. Moreover, it is still hard to find a tool that provides users with an environment to reuse terms. This paper presents Prot{\'e}g{\'e}LOV, a plugin for the ontology editor Prot{\'e}g{\'e}, that combines the access to the Linked Open Vocabularies (LOV) during ontology modeling. It allows users to search a term in LOV and provides three actions if the term exists : (i) replace the selected term in the current ontology; (ii) add the {\tt rdfs:subClassOf} or {\tt rdfs:subPropertyOf} axiom between the selected term and the local term; and (iii) add the {\tt owl:equivalentClass} or {\tt owl:equivalentProperty} between the selected term and local term. Results from a preliminary user study indicate that Prot{\'e}g{\'e}LOV does provide an intuitive access and reuse of terms in external vocabularies.
+%\keywords{ontology engineering, ontology reuse, LOV, Prot{\'e}g{\'e}, Plugin} 
+\end{abstract}
+
+% Categories for the papers.
+\todo{Find the right one here}
+\category{H.4}{Information Systems Applications}{Miscellaneous}
+\category{H.3.5}{Online Information Services}{Data sharing}[Web-based services]
+
+\terms{Accessibility, Linked Data, Vocabularies}
+
+\keywords{ontology engineering, ontology reuse, LOV, Prot{\'e}g{\'e}, Plugin}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  1. Introduction  %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\vspace{-3mm}
+\section{Introduction}\label{sec:introduction}
+\input{intro}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  2. Related work  %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\vspace{-3mm}
+\section{Related Work}\label{sec:soa}
+%\vspace{-3mm}
+\input{relatedwork}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  3.LOV APIs Description  %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\vspace{-3mm}
+\section{Linked Open Vocabulaires (LOV)}\label{sec:lov}
+%\vspace{-3mm}
+\input{lov}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  4.ProtegeLOV Description  %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\vspace{-3mm}
+%\section{Prot{\'e}g{\'e}LOV}\label{sec:classification}
+%\input{plugin-core}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  5. Conclusion and Future Work  %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\vspace{-3mm}
+\section{Evaluation}\label{sec:conclusion}
+\input{conclusions}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  Acknowledgments  %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%\vspace{-1mm}
+\paragraph{\textbf{Acknowledgments.}} %\label{sec:acknowledgments}
+Thanks to Pierre-Yves and the LOV team for maintaining the LOV catalog and the API access.
+% More acknowledgments here
+%\vspace{-3mm}
+
+\bibliographystyle{abbrv}
+%\nocite{*}
+\bibliography{isemanticsbib}
+\balancecolumns
+\end{document}

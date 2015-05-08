@@ -1,0 +1,23 @@
+The intended purpose of the LOV \cite{vandenbusschelov} is to help users to find and reuse terms of vocabularies in Linked Open Data. For achieving that purpose, the LOV gives access to vocabularies metadata and terms using programmatic access with APIs.  
+LOV\footnote{\url{http://lov.okfn.org/dataset/lov/}} catalogue is a hub of curated vocabularies used in the Linked Open Data Cloud, as well as other vocabularies suggested by users for their reuse. 
+Some of the three main features of the LOV are for: (1) searching ontologies according to their scope, (2) assessing ontologies by providing a score for each term retrieved by a keyword search and (3) interconnecting ontologies using VOAF vocabulary\footnote{\url{http://lov.okfn.org/vocab/voaf}}.
+The search function uses an algorithm based on the term
+popularity in LOD and in the LOV ecosystem. The matched resource set for each term should be the value of the a) {\tt rdfs:label} b) {\tt rdfs:comment}, or c) {\tt rdfs:description} property.
+
+%\begin{enumerate}
+%\item Searching ontologies: It is the main LOV's feature is the search of vocabulary terms. These vocabularies are categorized within LOV according to the domain they address. In this way, LOV contributes to ontology search by means of (a) keyword search and (b) domain browsing.
+% \item Assessing ontologies: LOV provides a score for each term retrieved by a keyword search. This score can be used during the assessment stage.
+% \item Interconnecting ontologies: In LOV, vocabularies rely on each other in seven different ways. These relationships are explicitly stated using VOAF vocabulary\footnote{\url{http://lov.okfn.org/vocab/voaf}}. 
+%\end{enumerate}
+
+Futhermore, the LOV APIs give a remote access to the many functions of LOV through a set of RESTful services\footnote{\url{http://lov.okfn.org/dataset/lov/apidoc/}}. %The basic design requirements for these APIs is that they should allow applications to get access to the very same information humans do via the User Interfaces. More precisely the
+The APIs give access through three different type of services related to: (1) vocabulary terms (classes, properties, datatypes and instances), (2) vocabulary browsing and (3) ontology's creators. 
+
+%\begin{enumerate} 
+%	\item vocabulary terms (classes, properties, datatypes and instances) providing functions to query the LOV search engine, with autocompletion features;
+%	\item vocabulary browsing, in which a client can get access to the current list of vocabularies contained in the LOV catalogue and search for vocabularies for further purpose;
+%	\item agents, or the ontology's creators, contributors or organizations. It also contains the search with autocompletion of an agent.
+%	\end{enumerate}
+
+%to continue 
+
