@@ -1,8 +1,9 @@
-TO DO we have to extend this RElated work
+\todo{we have to extend this Related work}
 
 So far, Linked Data principles and practices are being adopted by an increasing number of data providers, getting as result a global data space on the Web containing hundreds of LOD datasets \cite{Heath_Bizer_2011}. There are already several guidelines for generating, publishing, interlinking, and consuming Linked Data \cite{Heath_Bizer_2011}. An important task, within the generation process, is to build the vocabulary to be used for modelling the domain of the data sources, and the common recommendation is to reuse as much as possible available vocabularies \cite{Heath_Bizer_2011,hyland14}. This reuse approach speeds up the vocabulary development, and therefore, publishers will save time, efforts, and resources. 
 
-There are research efforts, like the NeOn Methodology \cite{suarezfigueroa2012ontology}, the Best Practices for Publishing Linked Data - W3C Working Group Note \cite{hyland14}, and the work proposed by Lonsdale et al. \cite{Lonsdale2010318}. However, at the time of writing we have not found specific and detailed guidelines that describe how to reuse available vocabularies at fine granularity level,i.e., reusing specific classes and properties. Our claim is that this difficulty in how to reuse vocabularies at low fine grained level is one of major barriers to the vocabulary development and in consequence to deployment of Linked Data.
+There are research efforts, like the NeOn Methodology \cite{suarezfigueroa2012ontology}, the Best Practices for Publishing Linked Data - W3C Working Group Note \cite{hyland14}, and the work proposed by Lonsdale et al. \cite{Lonsdale2010318}. However, at the time of writing we have not found specific and detailed guidelines that describe how to reuse available vocabularies at fine granularity level,i.e., reusing specific classes and properties. Our claim is that this difficulty in how to reuse vocabularies at low fine grained level is one of major barriers to the reuse of vocabularies on the Web and in consequence to deployment of Linked Data.
+
 
 Moreover, the recent success of Linked Open Vocabularies (LOV\footnote{\url{http://lov.okfn.org/dataset/lov/}}) as a central point for curated catalog of ontologies is helping to convey on best practices to publish vocabularies on the Web, as well as to help in the Data publication activity on the Web. LOV comes with many features, such as an API, a search function and a SPARQL endpoint.
 
@@ -21,14 +22,14 @@ In this paper we propose an initial set of guidelines for this task, and provide
 
 \section{Reusing vocabulary elements\\ when building ontologies}\label{sec:reuse}
 
-We have to improve this section 
+\todo{We have to improve this section}
 
 In this section we describe the procedure of reusing available vocabulary terms when building ontologies. In a nutshell, the task of building vocabularies by reusing available vocabulary terms consists of
 
 \begin{itemize}
-	\item Search for suitable vocabulary terms to reuse from the LOV repository. The search should be conducted by using the terms of the application domain.
-	\item Assess the set of candidate terms from LOV repository. In this particular case the results coming from LOV repository include a score for each term retrieved.
-	\item Select the most appropriate term taking into the account its score.
+	\item Search for suitable vocabulary terms to reuse from the any vocabulary repository, such as BioPortal, LOV, Biotec.org, etc. The search should be conducted by using the terms of the application domain.
+	\item Assess the set of candidate terms from the vocabulary repository. In the particular case of LOV, the results include a score related to their ``importance'' in the corpus for each term retrieved.
+	\item Select the most appropriate term taking into the account its score. Other criteria can be also considered here: (i) the stability of the URI namespace, (i) the 
 	\item Include the selected term in the ontology that has being developed. The selected term will be the external term. There are three alternatives in this case: 
 	\begin{itemize}
 		\item Include the external term and use it directly in the local ontology by defining local axioms to/from that term in the local ontology.
