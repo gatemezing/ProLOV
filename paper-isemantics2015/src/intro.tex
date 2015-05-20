@@ -20,21 +20,42 @@ In this paper we propose an initial set of guidelines for this task, and provide
 
 %This paper presents \protege, a first implementation of the LOV realized as a plugin for the ontology editor \protege. 
 
-\section{Reusing vocabulary elements\\ when building ontologies}\label{sec:reuse}
+\section{Reusing vocabulary terms\\ when building ontologies}\label{sec:reuse}
 
-\todo{We have to improve this section}
+\todo{We have to improve this section- add a picture for workflow}
+In the literature there exist many attempts to advise vocabulary publishers on the importance of reusing terms, as indicated in \todo{cite papers}. However, to the best of our knowledge there are not guidelines to help vocabulary practitioners to reuse vocabularies in real-world scenario. 
 
-In this section we describe the procedure of reusing available vocabulary terms when building ontologies. In a nutshell, the task of building vocabularies by reusing available vocabulary terms consists of
+In this section we describe the workflow of reusing available vocabulary terms when building ontologies. In a nutshell, the task of building vocabularies by reusing available vocabulary terms consists of:
 
 \begin{itemize}
-	\item Search for suitable vocabulary terms to reuse from the any vocabulary repository, such as BioPortal, LOV, Biotec.org, etc. The search should be conducted by using the terms of the application domain.
-	\item Assess the set of candidate terms from the vocabulary repository. In the particular case of LOV, the results include a score related to their ``importance'' in the corpus for each term retrieved.
-	\item Select the most appropriate term taking into the account its score. Other criteria can be also considered here: (i) the stability of the URI namespace, (i) the 
-	\item Include the selected term in the ontology that has being developed. The selected term will be the external term. There are three alternatives in this case: 
+	\item Searching for suitable vocabulary terms to reuse from the any vocabulary repository, such as BioPortal, LOV, Biotec.org, etc. The search should be conducted by using the terms of the application domain.
+	\item Assessing the set of candidate terms from the vocabulary repository. In the particular case of LOV, the results include a score related to their ``importance'' in the corpus for each term retrieved.
+	\item Selecting the most appropriate term taking into the account its score from the candidates terms proposed. Other criteria can be also considered here: (i) the stability of the URI namespace, (i) the 
+	\item Including the selected term in the ontology that has being developed. The selected term will be the external term. There are three alternatives in this case: 
 	\begin{itemize}
-		\item Include the external term and use it directly in the local ontology by defining local axioms to/from that term in the local ontology.
+		\item Include the external term and use it directly in the local ontology by defining local axioms to or from that term in the local ontology.
 		\item Include the external term, create a local term, and define the {\tt rdfs:subClassOf} or {\tt rdfs:subPropertyOf} axiom to relate both terms.
 		\item Include the external term, create a local term, and define the {\tt owl:equivalentClass} or {\tt owl:equivalentProperty} axiom to relate both terms. 				
 	\end{itemize}
 \end{itemize}
+
+\subsection{Use case scenario: lobid vocabulary}
+\label{lobid vocabulary}
+The lobid vocabulary\footnote{\url{http://purl.org/lobid/lv}} is a vocabulary designed for the  linking open bibliographic data services. The ontology was first published on 2012-03-02 with only two properties, a minimal metadata information and labels in English. Since then, there have been 15 different versions and the current version (version of 2015-02-09) of the ontology contains 8 classes and 16 properties. Based on the different changes occurred during the on-going development of the lobid vocabulary, vocabulary changes can be grouped in two categories:
+\begin{itemize}
+\item Editorial changes (EDc) are the ones related with labels and comments translations, typos fixed. Those changes don't affect the structure of the vocabulary.
+\item Semantic changes (SMc), are related with modifying the structure of the vocabulary, by either adding new axioms, new classes and properties.
+\end{itemize}
+
+Furthermore, the semantic changes can be broken down in four categories related to the main parts of a vocabulary, that are metadata, classes, properties and axioms. Thus we can group them as follows:
+
+\begin{itemize}
+\item Metadata changes (MTc), when the changes concern the metadata section of the vocabulary
+\item Property changes (PPc) 
+\item Classes changes (CLc) 
+\item Axioms changes (AXc) for changes on general axioms of the vocabulary
+
+\end{itemize}
+  
+
 
