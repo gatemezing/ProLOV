@@ -33,9 +33,12 @@ How to use
   
   
 
-Target conferences
+Todos List
 =================
-  - [ ] ESWC 2015, DEMO session (Deadline: 13/03/2015)
-  - [ ] ISWC 2015, with users evaluation, ontology track (long paper)
-  - [ ] Semantics 2015 (long paper) (May 22, 2015) http://semantics.cc/
   
+  - [x] Make available the plugin into Protege update mechanism
+  - [ ] Implement G2 & G3 UCs 
+  - [ ] Prepare a good protocol for users evaluation
+  - [ ] Integrate with other vocabulary repositories: BioPortal, Ontology Design Patterns? (suggested by #reviewer 2  of ESWC paper)
+  - [ ] Add ObjectProperties skos:ExactMatch, skos:narrowMatch, skos:broadMatch, skos:closeMatch. these might be useful to have in addition to the subclass and equivalence relations.
+
