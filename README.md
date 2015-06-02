@@ -19,9 +19,9 @@ Protégé Plugin development
   - http://protegewiki.stanford.edu/wiki/CompileProtege5InEclipseWithMaven  
   - http://protegewiki.stanford.edu/wiki/PluginAnatomy
 
-Use Cases document
+Link to Protégé Wiki
 =================
-  - Use Cases GDoc https://docs.google.com/document/d/1GDbeKMP6608XzlCGzrm5jWLJY3mU-4MLLsgIuZejqvU/edit?usp=sharing 
+  - http://protegewiki.stanford.edu/wiki/Prot%C3%A9g%C3%A9LOV
   
 Evaluation survey
 ==================
