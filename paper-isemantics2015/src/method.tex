@@ -1,31 +1,14 @@
 \todo{We have to improve this section- add a picture for workflow}
 \todo{Boris will do it}
 
-In this section we describe the workflow of reusing available vocabulary terms when building ontologies.
-Figure \ref{} depicts the proposed workflow.
-
-
-\subsection{Workflow on Reusing Terms}
-In a nutshell, the task of building vocabularies by reusing available vocabulary terms consists of the following steps:
-
-\begin{itemize}
-	\item Searching for suitable vocabulary terms to reuse from the any vocabulary repository, such as BioPortal, LOV, Biotec.org, etc. The search should be conducted by using the terms of the application domain.
-	\item Assessing the set of candidate terms from the vocabulary repository. In the particular case of LOV, the results include a score related to their ``importance'' in the corpus for each term retrieved.
-	\item Selecting the most appropriate term taking into the account its score from the candidates terms proposed. Other criteria can be also considered here: (i) the stability of the URI namespace, (ii) the trustworthiness of the publisher of the vocabulary and (iii) the presence or absence of a community using the vocabulary.
-	\item Including the selected term in the ontology that has being developed. The selected term will be the external term. There are three alternatives in this case: 
-	\begin{itemize}
-		\item Include the external term and use it directly in the local ontology by defining local axioms to or from that term in the local ontology.
-		\item Include the external term, create a local term, and define the {\tt rdfs:subClassOf} or {\tt rdfs:subPropertyOf} axiom to relate both terms.
-		\item Include the external term, create a local term, and define the {\tt owl:equivalentClass} or \\ {\tt owl:equivalentProperty} axiom to relate both terms. 				
-	\end{itemize}
-\end{itemize}
+In this section, we describe the workflow for reusing available vocabulary terms when building ontologies based on an existing catalogue of vocabularies. Recall that we do not specify which the expressivity of the resulting ontology. We foresee that the resulting ontology is likely to be a lightweight ontology. However the data publisher is responsible for adding more semantics when reusing existing vocabulary terms. Figure \ref{} depicts the proposed workflow. 
 
 \subsection{Use case scenario: lobid vocabulary}
 \label{lobid vocabulary}
-The \texttt{lobid} vocabulary\footnote{\url{http://purl.org/lobid/lv}} is a vocabulary designed for the  linking open bibliographic data services. The ontology was first published on 2012-03-02 with only two properties, a minimal metadata information and labels in English. Since then, there have been 15 different versions and the current version (version of 2015-02-09) of the ontology contains 8 classes and 16 properties. Based on the different changes occurred during the on-going development of the lobid vocabulary, vocabulary changes can be grouped in two categories:
+Looking at the evolution of some vocabularies with highest changes since their release in LOV,\texttt{lobid} vocabulary is the winner with 16 modifications. The \texttt{lobid} vocabulary\footnote{\url{http://purl.org/lobid/lv}} is a vocabulary designed for the  linking open bibliographic data services. The ontology was first published on 2012-03-02 with only two properties, a minimal metadata information and labels in English. Since then, there have been 15 different versions and the current version (version of 2015-02-09) of the ontology contains 8 classes and 16 properties. Based on the different changes occurred during the on-going development of the lobid vocabulary, vocabulary changes can be grouped in two categories:
 \begin{itemize}
 \item Editorial changes (EDc) are the ones related with labels and comments translations, typos fixed. Those changes don't affect the structure of the vocabulary.
-\item Semantic changes (SMc), are related with modifying the structure of the vocabulary, by either adding new axioms, new classes and properties.
+\item Semantic changes (SMc) are related with modifying the structure of the vocabulary, by either adding new axioms, new classes and properties.
 \end{itemize}
 
 Furthermore, the semantic changes can be broken down in four categories related to the main parts of a vocabulary, that are metadata, classes, properties and axioms. Thus we can group them as follows:
@@ -39,6 +22,7 @@ Furthermore, the semantic changes can be broken down in four categories related 
 \end{itemize}
 
 Table \ref{tab:lobid} summarizes the number of changes for the lobid vocabulary. In  a total of 20 changes, only 2 are editorial changes and each time accompanied with a semantic change in the corresponding version.
+\texttt{lobid} vocabulary is a good example of reusing existing terms where the definition of all the classes are ``subclassing'' of three existing vocabularies: \texttt{dct}, \texttt{bibo} and \texttt{archives}\footnote{\url{http://data.archiveshub.ac.uk/def/}}.  
 
 \begin{table}[!htb]
 \centering{
@@ -54,3 +38,20 @@ Table \ref{tab:lobid} summarizes the number of changes for the lobid vocabulary.
 \label{tab:lobid}
 }
 \end{table}
+
+\subsection{Workflow on Reusing Terms}
+In a nutshell, the task of building vocabularies by reusing available vocabulary terms consists of the following steps:
+
+\begin{itemize}
+	\item Searching for suitable vocabulary terms to reuse from the any vocabulary repository, such as BioPortal, LOV, Bartoc.org\footnote{\url{http://bartoc.org}}, etc. The search should be conducted by using the terms of the application domain.
+	\item Assessing the set of candidate terms from the vocabulary repository. In the particular case of LOV, the results include a score related to their ``importance'' in the corpus for each term retrieved.
+	\item Selecting the most appropriate term taking into the account its score from the candidates terms proposed. Other criteria can be also considered here: (i) the stability of the URI namespace, (ii) the trustworthiness of the publisher of the vocabulary and (iii) the presence or absence of a community using the vocabulary.
+	\item Including the selected term in the ontology that has being developed. The selected term will be the external term. There are three alternatives in this case: 
+	\begin{itemize}
+		\item Include the external term and use it directly in the local ontology by defining local axioms to or from that term in the local ontology.
+		\item Include the external term, create a local term, and define the {\tt rdfs:subClassOf} or {\tt rdfs:subPropertyOf} axiom to relate both terms.
+		\item Include the external term, create a local term, and define the {\tt owl:equivalentClass} or \\ {\tt owl:equivalentProperty} axiom to relate both terms. 				
+	\end{itemize}
+\end{itemize}
+
+
