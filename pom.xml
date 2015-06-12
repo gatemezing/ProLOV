@@ -4,9 +4,9 @@
 	
 	<groupId>com.expertsystem.protege</groupId>
 	<artifactId>com.expertsystem.lab.plugin.lov</artifactId>
-	<version>0.1.0-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>LOV plugin</name> 
-	<description>A LOV plugin for Protege Workspace</description> 
+	<description>A LOV plugin for Protege Workspace</description> 		
 
 	<packaging>bundle</packaging>
 	
@@ -51,6 +51,7 @@
 						<Bundle-ClassPath>.,json-20140107.jar</Bundle-ClassPath>
 						<Bundle-SymbolicName>${project.artifactId};singleton:=true</Bundle-SymbolicName>
 						<Bundle-Vendor>The Protege Development Team</Bundle-Vendor>
+						<Update-Url>https://raw.githubusercontent.com/gatemezing/ProLOV/master/update.properties</Update-Url>
 						<Import-Package>
 							org.apache.log4j.*;version="[1.2,2)", 
 							org.protege.editor.core.*;version="4.3",

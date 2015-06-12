@@ -49,11 +49,11 @@ public class LOVConnector implements Constants {
 	 * @return JSONObject: Results from the query in json format
 	 */
 
-	public JSONObject searchTerm(String q, String type){
+	public JSONObject searchTerm(String q, String type, int page){
 		HttpURLConnection connection;
 		JSONObject json = null;		
 		String query = LOV_QUERY_STRING + q + ""
-				+ "&type=" + type;
+				+ "&type=" + type + "&page=" + page /*+ "&page_size=50"*/;
 
 		URL url;
 		try {
@@ -313,11 +313,12 @@ public class LOVConnector implements Constants {
 
 
 	/*public static void main(String[] args){
+		//System.out.println((int) Math.ceil(42 / 10.0));
 		//LOVConnector lovapi = new LOVConnector();
-		//lovapi.searchTerm("Scale", "class");
+		//lovapi.searchTerm("Scale", "class", 5);
 		//lovapi.parseTerms(lovapi.searchTerm("Scale", "class"));
 
-		String uri = "http://www.aktors.org/ontology/portal#Person";
+		/*String uri = "http://www.aktors.org/ontology/portal#Person";
 		String name = "Person";
 
 		String base_uri = uri.substring(0, uri.length() - name.length());

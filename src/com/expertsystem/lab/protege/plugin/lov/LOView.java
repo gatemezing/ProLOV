@@ -1,6 +1,7 @@
 package com.expertsystem.lab.protege.plugin.lov;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URI;
@@ -12,6 +13,7 @@ import java.util.Set;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 import org.apache.log4j.Logger;
 import org.protege.editor.core.ui.util.ComponentFactory;
@@ -51,6 +53,9 @@ public class LOView extends AbstractOWLViewComponent {
 	private Logger logger = Logger.getLogger(LOView.class);
 	private LOVSelectionPanel lsp;
 	private LOVResultsPanel lrp;
+	private JPanel statusPanel;
+	private JPanel pagePanel;
+	private List<JButton> pageButtons;
 	private LOVConnector connector;
 	private JButton selectionButton;
 	private OWLSelectionModel selectionModel;	
@@ -69,12 +74,12 @@ public class LOView extends AbstractOWLViewComponent {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == selectionButton){
-				updateListLOV();				
+				updateListLOV(1, true);				
 			}			
 		}		
 	};
 
-	public void updateListLOV() {
+	public void updateListLOV(int page, boolean first) {
 		String type_lov = lsp.getType();
 		if(type_lov.equals("objectproperty")){
 			type_lov = "property";
@@ -89,17 +94,43 @@ public class LOView extends AbstractOWLViewComponent {
 		if(!query.equals(lsp.getLabel_value())){
 			query += "," + lsp.getLabel_value();
 		}
-		List<ResultsListItem> r = connector.parseTerms(connector.searchTerm(lsp.getLocal_name_value(), type_lov));
+		List<ResultsListItem> r = connector.parseTerms(connector.searchTerm(lsp.getLocal_name_value(), type_lov, page));
 		if(r == null){
 			status.setText("Error Status: Connection problem API LOV - Access down");			
 		}
 		else{
-			int results_shown = 10;
+			if(first){
+				int total = connector.getTotal_results();				
+				if(total > 50)
+					total = 50;				
+				
+				status.setText("Total: " + total);
+				if(total > 0){
+					int num_pages = (int) Math.ceil(total / 10.0);
+					for(int i=1; i<=num_pages; i++){
+						final JButton button = new JButton(String.valueOf(i));
+						button.setOpaque(false);
+						button.setContentAreaFilled(false);
+						button.setBorderPainted(false);
+						pageButtons.add(button);
+						pagePanel.add(button);
+						button.addActionListener(new ActionListener() {
+							
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								updateListLOV(Integer.valueOf(button.getText()), false);							
+							}
+						});
+					}	
+				}							
+			}			
+			/*int results_shown = 10;
 			if(connector.getTotal_results() < 10){
 				results_shown = connector.getTotal_results();
-			}
-			status.setText("Total Results (" + lsp.getLocal_name_value() + "): " + results_shown + " of " 
-					+ connector.getTotal_results());	
+			}*/
+			/*status.setText("Total Results (" + lsp.getLocal_name_value() + "): " + results_shown + " of " 
+					+ connector.getTotal_results());*/
+					
 			lrp.updateLOVResults(r);
 			lrp.updateUI();
 		}			
@@ -112,7 +143,7 @@ public class LOView extends AbstractOWLViewComponent {
 			if (lrp.getList_results().getSelectedValue() instanceof ResultsListItem) {
 				ResultsListItem item = (ResultsListItem) lrp.getList_results().getSelectedValue();
 				handleAdd(item);
-				updateListLOV();
+				updateListLOV(1, true);
 			}
 		}
 
@@ -218,7 +249,7 @@ public class LOView extends AbstractOWLViewComponent {
 			if (lrp.getList_results().getSelectedValue() instanceof ResultsListItem) {
 				ResultsListItem item = (ResultsListItem) lrp.getList_results().getSelectedValue();
 				handleEdit(item);
-				updateListLOV();
+				updateListLOV(1, true);
 			}
 		}
 
@@ -249,7 +280,7 @@ public class LOView extends AbstractOWLViewComponent {
 			if (lrp.getList_results().getSelectedValue() instanceof ResultsListItem) {
 				ResultsListItem item = (ResultsListItem) lrp.getList_results().getSelectedValue();
 				handleSubEntity(item);
-				updateListLOV();
+				updateListLOV(1, true);
 			}
 		}
 
@@ -318,17 +349,22 @@ public class LOView extends AbstractOWLViewComponent {
 		logger.info("Initializing LOV view");
 		setLayout(new BorderLayout());
 		connector = new LOVConnector();
+		pageButtons = new ArrayList<JButton>();
 		selectionButton = new JButton("Search...");
 		selectionButton.setToolTipText("Search LOV...");
 		selectionButton.addActionListener(button_listener);
 		lsp = new LOVSelectionPanel(selectionButton);
 		lrp = new LOVResultsPanel(add_listener, edit_listener, subclass_listener);		
+		statusPanel = new JPanel(new BorderLayout());
+		pagePanel = new JPanel(new GridLayout(0,5));		
 		lsp.setBorder(ComponentFactory.createTitledBorder("LOV Selection Entity"));
 		lrp.setBorder(ComponentFactory.createTitledBorder("LOV Results"));
 		add(lsp, BorderLayout.NORTH);	
 		add(lrp, BorderLayout.CENTER);
 		status = new JLabel("OK Status ");
-		add(status, BorderLayout.SOUTH);	
+		statusPanel.add(status, BorderLayout.WEST);		
+		statusPanel.add(pagePanel, BorderLayout.EAST);
+		add(statusPanel, BorderLayout.SOUTH);
 		selectionModel = getOWLWorkspace().getOWLSelectionModel();
 		selectionModel.addListener(listener);		
 	}
@@ -365,5 +401,6 @@ public class LOView extends AbstractOWLViewComponent {
 		}		
 		lrp.init();
 		status.setText("OK Status ");
+		pagePanel.removeAll();
 	}	
 }
