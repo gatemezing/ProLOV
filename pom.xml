@@ -4,7 +4,7 @@
 	
 	<groupId>com.expertsystem.protege</groupId>
 	<artifactId>com.expertsystem.lab.plugin.lov</artifactId>
-	<version>1.0</version>
+	<version>1.0.0</version>
 	<name>LOV plugin</name> 
 	<description>A LOV plugin for Protege Workspace</description> 		
 
