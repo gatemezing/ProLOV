@@ -14,7 +14,7 @@
 \usepackage{subfigure}
 \usepackage{algorithmic}
 \usepackage{algorithm}
-
+\usepackage{verbatim}
 
 %\newcommand{\keywords}[1]{\par\addvspace\baselineskip
 %\noindent\keywordname\enspace\ignorespaces#1}
@@ -42,7 +42,7 @@
 
 
 %\title{How to access and reuse ontologies in real-world scenarios}
-\title{Practical Guidelines for reusing vocabularies in real-world scenarios: A LOV-based Approach}
+\title{Promoting Reuse within Ontology Engineering in a Linked Data World}
 
 \numberofauthors{3}
 \author{
@@ -71,12 +71,16 @@
 %%%%%%%%%%%%%%%%%%
 
 \begin{abstract}
-Developing ontologies, by reusing already available and well-known ontologies, is commonly acknowledge to play a crucial role to facilitate inclusion and expansion of the Web of Data. Some recommendations exist to guide ontologists in ontology engineering, but they do not provide guidelines on how to reuse vocabularies at low fine grained, i.e., reusing specific classes and properties. Moreover, it is still hard to find a tool that provides users with an environment to reuse terms. This paper presents Prot{\'e}g{\'e}LOV, a plugin for the ontology editor Prot{\'e}g{\'e}, that combines the access to the Linked Open Vocabularies (LOV) during ontology modeling. It allows users to search a term in LOV and provides three actions if the term exists : (i) replace the selected term in the current ontology; (ii) add the {\tt rdfs:subClassOf} or {\tt rdfs:subPropertyOf} axiom between the selected term and the local term; and (iii) add the {\tt owl:equivalentClass} or {\tt owl:equivalentProperty} between the selected term and local term. Results from a preliminary user study indicate that Prot{\'e}g{\'e}LOV does provide an intuitive access and reuse of terms in external vocabularies.
+Developing ontologies by reusing already available and well-known ontologies, is commonly acknowledged to play a crucial role to facilitate inclusion and expansion of the Web of Data. Some recommendations exist to guide ontology engineers, but those recommendations do not provide guidelines on how to reuse fine-grained vocabulary elements, i.e., reusing specific classes and properties. Moreover, it is still hard to find a tool that promotes and facilitates the reuse of available terms when building ontologies. This paper presents (1) a set of guidelines for reusing fine-grained vocabulary elements, and (2) a technological support for such guidelines, Prot{\'e}g{\'e}LOV. Prot{\'e}g{\'e}LOV is a plugin for the ontology editor which combines the access to the Linked Open Vocabularies (LOV) during ontology modelling. It allows users to search a term in LOV and provides actions to include the external term in the ontology being developed. Results from a preliminary user study indicate that the proposed guidelines using Prot{\'e}g{\'e}LOV can booster the access and reuse of terms of existing vocabularies.
 %\keywords{ontology engineering, ontology reuse, LOV, Prot{\'e}g{\'e}, Plugin} 
 \end{abstract}
 
 % Categories for the papers.
-\todo{Find the right categories of the paper for acm}
+%\todo{Replace with the categories provided by Nuria}
+%\category{M}{Knowledge Management}
+%\category{M.1}{Knowledge engineering methodologies}
+%\category{M.1}{Knowledge engineering methodologies}
+%\category{M.8.}{Knowledge Reuse}
 \category{H.4}{Information Systems Applications}{Miscellaneous}
 \category{H.3.5}{Online Information Services}{Data sharing}[Web-based services]
 
@@ -90,7 +94,7 @@ Developing ontologies, by reusing already available and well-known ontologies, i
 %%%  1. Introduction  %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%
 
-%\vspace{-3mm}
+\vspace{3mm}
 \section{Introduction}\label{sec:introduction}
 \input{intro}
 
@@ -98,12 +102,12 @@ Developing ontologies, by reusing already available and well-known ontologies, i
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%  2. Related work  %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\vspace{-3mm}.
+\vspace{10mm}.
 \section{Related Work}\label{sec:soa}
 \input{relatedwork}
 
 
-
+\vspace{3mm}.
 \section{Reusing vocabulary terms\\ when building ontologies}\label{sec:reuse}
 \input{method}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -111,6 +115,7 @@ Developing ontologies, by reusing already available and well-known ontologies, i
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\vspace{-3mm}
 %\section{Linked Open Vocabulaires (LOV)}\label{sec:lov}
+\vspace{3mm}.
 \section{Technological Support}
 %\vspace{-3mm}
 \input{lov}
@@ -128,7 +133,7 @@ Developing ontologies, by reusing already available and well-known ontologies, i
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%  5. Conclusion and Future Work  %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\vspace{-3mm}
+\vspace{3mm}
 \section{Evaluation}\label{sec:conclusion}
 \input{conclusions}
 
@@ -137,9 +142,9 @@ Developing ontologies, by reusing already available and well-known ontologies, i
 %%%%%%%%%%%%%%%%%%%%%%%%%
 %%%  Acknowledgments  %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%
-%\vspace{-1mm}
+\vspace{1mm}
 \paragraph{\textbf{Acknowledgments.}} %\label{sec:acknowledgments}
-Thanks to Pierre-Yves and the LOV team for maintaining the LOV catalog and the API access.
+Thanks to Pierre-Yves and the LOV team for maintaining the LOV catalog and the API access. This work has been supported by the KDrive Project.
 % More acknowledgments here
 %\vspace{-3mm}
 
