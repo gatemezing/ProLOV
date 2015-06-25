@@ -99,7 +99,13 @@ public class LOView extends AbstractOWLViewComponent {
 			status.setText("Error Status: Connection problem API LOV - Access down");			
 		}
 		else{
-			if(first){
+			if(first){		
+				//Remove previous buttons of the panel
+				for(int b=0; b<pageButtons.size(); b++){
+					pagePanel.remove(pageButtons.get(b));
+				}				
+				pageButtons = new ArrayList<JButton>();
+					
 				int total = connector.getTotal_results();				
 				if(total > 50)
 					total = 50;				
